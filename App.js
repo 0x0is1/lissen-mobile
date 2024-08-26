@@ -13,7 +13,7 @@ export default function App() {
     <PlayerProvider>
       <StatusBar hidden={true}/>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="PlayerScreen">
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="AlbumsScreen">
           <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
           <Stack.Screen name="AlbumsScreen" component={AlbumsScreen} />
         </Stack.Navigator>
