@@ -6,7 +6,7 @@ import { Circle } from 'react-native-svg'
 import { Easing } from 'react-native-reanimated';
 
 const ProgressBarContainer = () => {
-    const { progressBarOpacity, albumMode } = useContext(PlayerContext);
+    const { progressBarOpacity, albumMode, currentDuration, totalDuration } = useContext(PlayerContext);
     useEffect(()=>{
         Animated.timing(progressBarOpacity, {
             toValue: albumMode ? 0 : 1,
@@ -15,6 +15,7 @@ const ProgressBarContainer = () => {
             easing: Easing.ease,
         }).start();
     }, [albumMode])
+    
     return (
       <Animated.View
           style={[
@@ -26,7 +27,7 @@ const ProgressBarContainer = () => {
               <AnimatedCircularProgress
                   size={340}
                   width={8}
-                  fill={80}
+                    fill={Math.round((currentDuration / totalDuration) * 100)}
                   tintColor="black"
                   backgroundColor="gray"
                   padding={20}

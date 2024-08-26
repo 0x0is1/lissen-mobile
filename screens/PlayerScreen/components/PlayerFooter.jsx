@@ -1,12 +1,17 @@
-import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native'
-import React, { useEffect, useContext } from 'react'
-import { PlayerContext } from '../../../contexts/PlayerContext'
+import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
+import React, { useEffect, useContext } from 'react';
+import { PlayerContext } from '../../../contexts/PlayerContext';
 import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Easing } from 'react-native-reanimated';
 
 const PlayerFooter = () => {
-    const { footerHeightAnim, setOnShuffle, onShuffle, albumMode, setOnRepeat, onRepeat, isPlaying, setIsPlaying } = useContext(PlayerContext);
+    const {
+        footerHeightAnim, setOnShuffle, onShuffle, albumMode,
+        setOnRepeat, onRepeat, isPlaying, setIsPlaying,
+        playSound, stopSound, pauseSound, sound,
+        playingIndex, setPlayingIndex, playList
+    } = useContext(PlayerContext);
 
     useEffect(() => {
         Animated.timing(footerHeightAnim, {
@@ -17,26 +22,58 @@ const PlayerFooter = () => {
         }).start();
     }, [albumMode]);
 
-
     const handleOnRepeat = () => {
         setOnRepeat(!onRepeat);
     };
 
     const handlePlayPause = () => {
-        setIsPlaying(!isPlaying);
+        if (isPlaying) {
+            pauseSound();
+        } else if (sound) {
+            sound.playAsync();
+            setIsPlaying(true);
+        } else {
+            playSound();
+        }
     };
 
     const handleOnShuffle = () => {
         setOnShuffle(!onShuffle);
     };
-    
+
     const handleOnPrevious = () => {
-        console.log("Previous button pressed");
-    }
+        stopSound();
+        if (onShuffle) {
+            const randomIndex = Math.floor(Math.random() * playList.items.length);
+            setPlayingIndex(randomIndex);
+        } else if (onRepeat) {
+            setPlayingIndex(playingIndex);
+        } else {
+            if (playingIndex > 0) {
+                setPlayingIndex(playingIndex - 1);
+            } else {
+                setPlayingIndex(playList.items.length-1);
+            }
+        }
+        playSound();
+    };
 
     const handleOnNext = () => {
-        console.log("Next button pressed");
-    }
+        stopSound();
+        if (onShuffle) {
+            const randomIndex = Math.floor(Math.random() * playList.items.length);
+            setPlayingIndex(randomIndex);
+        } else if (onRepeat){
+            setPlayingIndex(playingIndex);
+        } else {
+            if (playingIndex < playList.items.length - 1) {
+                setPlayingIndex(playingIndex + 1);
+            } else {
+                setPlayingIndex(0);
+            }
+        }
+        playSound();
+    };
 
     return (
         <Animated.View style={[styles.footer, { height: footerHeightAnim }]}>
@@ -92,10 +129,10 @@ const PlayerFooter = () => {
                 </TouchableOpacity>
             </View>
         </Animated.View>
-    )
-}
+    );
+};
 
-export default PlayerFooter
+export default PlayerFooter;
 
 const styles = StyleSheet.create({
     footer: {
@@ -165,4 +202,4 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
     },
-})
+});

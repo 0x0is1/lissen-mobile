@@ -3,9 +3,9 @@ import React, { useContext } from 'react'
 import { PlayerContext } from '../../../contexts/PlayerContext';
 
 const DurationText = () => {
-    const { currentDuration } = useContext(PlayerContext);
+    const { currentDuration, formatTime } = useContext(PlayerContext);
     return (
-        <Text style={styles.durationText}>{currentDuration}</Text>
+        <Text style={styles.durationText}>{formatTime(currentDuration)}</Text>
     )
 }
 

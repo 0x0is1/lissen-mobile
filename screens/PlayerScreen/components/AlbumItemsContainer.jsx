@@ -5,7 +5,7 @@ import { PlayerContext } from '../../../contexts/PlayerContext';
 import { Easing } from 'react-native-reanimated';
 
 const AlbumItemsContainer = () => {
-    const { setPlayingIndex, playingIndex, albumItemsOpacity, albumMode, playList } = useContext(PlayerContext);
+    const { setPlayingIndex, playingIndex, albumItemsOpacity, albumMode, playList, playSound, stopSound } = useContext(PlayerContext);
     
     useEffect(()=>{
         Animated.timing(albumItemsOpacity, {
@@ -16,12 +16,14 @@ const AlbumItemsContainer = () => {
         }).start();
     }, [albumMode])
 
+    const onItemPlayPressed = (index) => {
+        setPlayingIndex(index);
+        stopSound();
+        playSound();
+    }
+
     const renderAlbumItems = ({ item, index }) => (
-        <TouchableOpacity
-            onPress={() => {
-                setPlayingIndex(index);
-            }}
-        >
+        <TouchableOpacity onPress={()=>onItemPlayPressed(index)}>
             <View style={styles.albumItems}>
                 <Text
                     style={[
