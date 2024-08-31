@@ -24,27 +24,28 @@ const ProgressBarContainer = () => {
           ]}
       >
           <View style={styles.progressBar}>
-              <AnimatedCircularProgress
-                  size={340}
-                  width={8}
-                    fill={Math.round((currentDuration / totalDuration) * 100)}
-                  tintColor="black"
-                  backgroundColor="gray"
-                  padding={20}
-                  arcSweepAngle={180}
-                  rotation={-90}
-                  lineCap="round"
-                  renderCap={({ center }) => (
-                      <Circle
-                          cx={center.x}
-                          cy={center.y}
-                          r="10"
-                          fill="white"
-                          stroke="black"
-                          strokeWidth={5}
-                      />
-                  )}
-              />
+                <AnimatedCircularProgress
+                    size={340}
+                    width={8}
+                    fill={totalDuration ? ((currentDuration / totalDuration) * 100) : 0}
+                    tintColor="black"
+                    backgroundColor="gray"
+                    padding={20}
+                    arcSweepAngle={180}
+                    rotation={-90}
+                    lineCap="round"
+                    renderCap={({ center }) => (
+                        <Circle
+                            cx={center.x}
+                            cy={center.y}
+                            r="10"
+                            fill="white"
+                            stroke="black"
+                            strokeWidth={5}
+                        />
+                    )}
+                />
+
           </View>
       </Animated.View>
   )

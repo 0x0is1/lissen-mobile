@@ -1,7 +1,8 @@
-import { StyleSheet, Text, Image, Animated } from 'react-native'
+import { StyleSheet, Text, View, Animated, ImageBackground } from 'react-native'
 import React, { useEffect, useContext } from 'react'
 import { PlayerContext } from '../../../contexts/PlayerContext'
 import { Easing } from 'react-native-reanimated';
+import { decode } from 'html-entities';
 
 const PlayerBanner = () => {
     const { albumMode, heightAnim, panResponder, playList, playingIndex } = useContext(PlayerContext)
@@ -19,21 +20,29 @@ const PlayerBanner = () => {
           style={[styles.imgContainer, { height: heightAnim }]}
           {...panResponder.panHandlers}
       >
-          <Image
+          <ImageBackground
               source={
                   albumMode
-                      ? playList.albumCover
-                      : playList.items[playingIndex].songCover
+                      ? {uri: playList.albumCover}
+                      : {uri: playList.items[playingIndex].songCover}
               }
               style={styles.image}
               resizeMode="cover"
-          />
+          >
+              <View style={styles.overlay} />
+          </ImageBackground>
           <Text style={styles.text}>
               {albumMode
-                  ? playList.albumName
-                  : playList.items[playingIndex].songName}
+                  ? decode(playList.albumName.length > 15
+                      ? `${playList.albumName.substring(0, 15)}...`
+                      : playList.albumName) 
+                  : decode(playList.items[playingIndex].songName.length > 15
+                      ? `${playList.items[playingIndex].songName.substring(0, 15)}...`
+                      : playList.items[playingIndex].songName)}
           </Text>
-          <Text style={[styles.text, styles.subtext]}>{playList.artistName}</Text>
+          <Text style={[styles.text, styles.subtext]}>{decode(playList.artistName.length > 15
+              ? `${playList.artistName.substring(0, 15)}...`
+              : playList.artistName)}</Text>
       </Animated.View>
   )
 }
@@ -41,6 +50,11 @@ const PlayerBanner = () => {
 export default PlayerBanner
 
 const styles = StyleSheet.create({
+
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0, 0, 0, 0.35)',
+    },
     imgContainer: {
         width: 250,
         overflow: "hidden",

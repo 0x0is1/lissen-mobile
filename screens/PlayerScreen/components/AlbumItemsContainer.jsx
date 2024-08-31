@@ -3,9 +3,9 @@ import React, { useContext, useEffect } from 'react'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { PlayerContext } from '../../../contexts/PlayerContext';
 import { Easing } from 'react-native-reanimated';
-
+import { decode } from "html-entities";
 const AlbumItemsContainer = () => {
-    const { setPlayingIndex, playingIndex, albumItemsOpacity, albumMode, playList, playSound, stopSound } = useContext(PlayerContext);
+    const { setPlayingIndex, formatTime, playingIndex, albumItemsOpacity, albumMode, playList, playSound, stopSound } = useContext(PlayerContext);
     
     useEffect(()=>{
         Animated.timing(albumItemsOpacity, {
@@ -33,7 +33,11 @@ const AlbumItemsContainer = () => {
                             : { fontWeight: "500" },
                     ]}
                 >
-                    {item.songName}
+                    {
+                    decode(item.songName.length) > 30
+                            ? `${decode(item.songName).substring(0,30)}...`
+                    : decode(item.songName)
+                    }
                 </Text>
                 <Text
                     style={[
@@ -43,7 +47,7 @@ const AlbumItemsContainer = () => {
                             : { fontWeight: "500" },
                     ]}
                 >
-                    {item.duration}
+                    {formatTime(item.duration*1000)}
                 </Text>
             </View>
         </TouchableOpacity>

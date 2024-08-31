@@ -22,18 +22,28 @@ const PlayerFooter = () => {
         }).start();
     }, [albumMode]);
 
+    useEffect(() => {
+        if (sound) {
+            playSound();
+        }
+    }, [playingIndex]);
+
     const handleOnRepeat = () => {
         setOnRepeat(!onRepeat);
     };
 
-    const handlePlayPause = () => {
-        if (isPlaying) {
-            pauseSound();
-        } else if (sound) {
-            sound.playAsync();
-            setIsPlaying(true);
-        } else {
-            playSound();
+    const handlePlayPause = async () => {
+        try {
+            if (isPlaying) {
+                await pauseSound();
+            } else if (sound) {
+                await sound.play();
+                setIsPlaying(true);
+            } else {
+                await playSound();
+            }
+        } catch (error) {
+            console.error("Error during play/pause operation:", error);
         }
     };
 
@@ -41,38 +51,30 @@ const PlayerFooter = () => {
         setOnShuffle(!onShuffle);
     };
 
-    const handleOnPrevious = () => {
-        stopSound();
-        if (onShuffle) {
-            const randomIndex = Math.floor(Math.random() * playList.items.length);
-            setPlayingIndex(randomIndex);
-        } else if (onRepeat) {
-            setPlayingIndex(playingIndex);
-        } else {
-            if (playingIndex > 0) {
-                setPlayingIndex(playingIndex - 1);
-            } else {
-                setPlayingIndex(playList.items.length-1);
-            }
-        }
-        playSound();
-    };
-
     const handleOnNext = () => {
         stopSound();
-        if (onShuffle) {
-            const randomIndex = Math.floor(Math.random() * playList.items.length);
-            setPlayingIndex(randomIndex);
-        } else if (onRepeat){
-            setPlayingIndex(playingIndex);
-        } else {
-            if (playingIndex < playList.items.length - 1) {
-                setPlayingIndex(playingIndex + 1);
+        setPlayingIndex(prevIndex => {
+            if (onShuffle) {
+                return Math.floor(Math.random() * playList.items.length);
+            } else if (onRepeat) {
+                return prevIndex;
             } else {
-                setPlayingIndex(0);
+                return prevIndex < playList.items.length - 1 ? prevIndex + 1 : 0;
             }
-        }
-        playSound();
+        });
+    };
+
+    const handleOnPrevious = () => {
+        stopSound();
+        setPlayingIndex(prevIndex => {
+            if (onShuffle) {
+                return Math.floor(Math.random() * playList.items.length);
+            } else if (onRepeat) {
+                return prevIndex;
+            } else {
+                return prevIndex > 0 ? prevIndex - 1 : playList.items.length - 1;
+            }
+        });
     };
 
     return (

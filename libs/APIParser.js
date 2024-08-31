@@ -4,16 +4,20 @@ class ServiceProvider {
     }
 
     async request(dir) {
-        const response = await fetch(`${this.baseURL}${dir}`, {
-            headers: {
-                "Accept": "application/json, text/plain, */*",
-                "Cookie": "DL=english; B=0829219470faf183150022ea217284c7; CT=MTA3Mjc3NTMwMw%3D%3D; L=hindi; geo=2409%3A40d1%3A100e%3A3406%3A2859%3A53c4%3A422a%3A5b9a%2CIN%2CChandigarh%2CChandigarh%2C160020; mm_latlong=30.7339%2C76.7889; _fp=447e78fdf3e907cb33da16a32332e1f1; ATC=l6qBA3wqQQkdu5AUAZM%2FLfJ%2Fh6%2FCHMpaMUGt0z7%2Bt5ad4%2BylY3qlKlpi8fbPehK0; CH=G03%2CA07%2CO00%2CL03"
-            }
-        });
-        console.log(`${this.baseURL}${dir}`);
-        
-        const data = await response.json();
-        return data;
+        try {            
+            console.log(`${this.baseURL}${dir}`);
+            const response = await fetch(`${this.baseURL}${dir}`, {
+                headers: {
+                    "Accept": "application/json, text/plain, */*",
+                    "Cookie": "B=ffe5a4383fa531151b96f993e2586d32; CT=MjgzNjUxNTc3; DL=english; L=hindi; geo=152.58.76.33%2CIN%2CPunjab%2CLudhiana%2C141007; mm_latlong=31.0048%2C75.9463; CH=G03%2CA07%2CO00%2CL03"
+                }
+            });
+            
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async getLaunchData() {
@@ -68,7 +72,7 @@ class ServiceProvider {
 
     async getStationById(name, count = 20) {
         const station_id = await this.request(`webradio.createFeaturedStation&language=hindi&pid=&query=&name=${name.replaceAll(" ", "+")}&mode=&artistid=&_format=json&_marker=0&ctx=web6dot0`);
-        const data = await this.request(`webradio.getSong&stationid=${station_id.stationid}&k=${count}&next=1&_format=json&_marker=0&ctx=web6dot0`);
+        const data = await this.request(`webradio.getSong&stationid=${station_id.stationid}&k=${count}&next=1&_format=json&_marker=0&ctx=web6dot0&api_version=4`);
         return data;
     }
 
@@ -104,6 +108,12 @@ class ServiceProvider {
         };
 
         return result;
+    }
+
+    async playByMediaUrl(mediaUrl) {
+        var authTokenData = await this.request(`song.generateAuthToken&url=${encodeURIComponent(mediaUrl)}&bitrate=160&api_version=4&_format=json&ctx=web6dot0&_marker=0`);        
+        const authUrl = await authTokenData.auth_url.replace("ac.cf.", "aac.");        
+        return authUrl
     }
 }
 export default ServiceProvider
