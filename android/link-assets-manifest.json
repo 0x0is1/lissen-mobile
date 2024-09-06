@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/adaptive-icon.png",
+      "sha1": "19b53640a95efdc2ccc7fc20f3ea4d0d381bb5c4"
+    },
+    {
+      "path": "assets/albumcover.png",
+      "sha1": "d44c3867f6477777afcf53e4d64ba7a364d242b3"
+    },
+    {
+      "path": "assets/favicon.png",
+      "sha1": "cb25ca74ddc488c91522b0ae68fc846fac7f4174"
+    },
+    {
+      "path": "assets/icon.png",
+      "sha1": "3f71f5a8458c06b83424cc33e1f2481f601199ea"
+    },
+    {
+      "path": "assets/songcover.png",
+      "sha1": "5d2daef60a5669b1307f25894b11f76ac7d12b71"
+    },
+    {
+      "path": "assets/splash.png",
+      "sha1": "206a875d5dc6f23eb9515bebd899ebb9f56eca82"
+    }
+  ]
+}

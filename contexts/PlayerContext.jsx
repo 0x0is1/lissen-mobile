@@ -1,5 +1,5 @@
-import React, { createContext, useState, useRef, useEffect, useCallback } from 'react';
-import { Animated, PanResponder } from 'react-native';
+import React, { createContext, useState, useRef, useEffect } from 'react';
+import { Animated, PanResponder, ToastAndroid } from 'react-native';
 import Sound from 'react-native-sound';
 import ServiceProvider from '../libs/APIParser';
 
@@ -22,6 +22,7 @@ export const PlayerProvider = ({ children }) => {
     const albumItemsOpacity = useRef(new Animated.Value(1)).current;
     const footerHeightAnim = useRef(new Animated.Value(80)).current;
     const serviceProvider = new ServiceProvider();
+
     const formatTime = (milliseconds) => {
         const minutes = Math.floor(milliseconds / 60000);
         const seconds = Math.floor((milliseconds % 60000) / 1000);
@@ -37,19 +38,19 @@ export const PlayerProvider = ({ children }) => {
         })
     ).current;
 
-    const getRandomIndex = useCallback(() => {
+    const getRandomIndex = () => {
         return Math.floor(Math.random() * (playList.items.length || 0));
-    }, [playList.items.length]);
+    };
 
-    const updateDuration = useCallback(() => {
+    const updateDuration = () => {
         if (soundRef.current) {
             soundRef.current.getCurrentTime(seconds => {
                 setCurrentDuration(seconds * 1000);
             });
         }
-    }, []);
+    };
 
-    const playSound = useCallback(async () => {
+    const playSound = async () => {
         if (soundRef.current) {
             soundRef.current.release();
             soundRef.current = null;
@@ -58,10 +59,9 @@ export const PlayerProvider = ({ children }) => {
         const playUrl = await serviceProvider.playByMediaUrl(playList.items[playingIndex]?.playUrl);
 
         if (playUrl) {
-            console.log('Loading and Playing Sound');
             const newSound = new Sound(playUrl, Sound.MAIN_BUNDLE, (error) => {
                 if (error) {
-                    console.log('Failed to load the sound', error);
+                    ToastAndroid.show(error, ToastAndroid.LONG);
                     return;
                 }
 
@@ -69,10 +69,9 @@ export const PlayerProvider = ({ children }) => {
 
                 newSound.play((success) => {
                     if (success) {
-                        console.log('Finished playing');
                         handlePlaybackFinish();
                     } else {
-                        console.log('Playback failed due to audio decoding errors');
+                        ToastAndroid.show('Playback failed due to audio decoding errors', ToastAndroid.SHORT);
                     }
                 });
 
@@ -87,11 +86,11 @@ export const PlayerProvider = ({ children }) => {
 
             newSound.setNumberOfLoops(onRepeat ? -1 : 0);
         } else {
-            console.log('Play URL is not set');
+            ToastAndroid.show('Play URL is not set', ToastAndroid.SHORT);
         }
-    }, [playList.items, playingIndex, onRepeat, updateDuration]);
+    };
 
-    const handlePlaybackFinish = useCallback(() => {
+    const handlePlaybackFinish = () => {
         clearInterval(intervalRef.current);
 
         const nextIndex = onShuffle
@@ -99,27 +98,24 @@ export const PlayerProvider = ({ children }) => {
             : (playingIndex + 1) % (playList.items.length || 1);
 
         setPlayingIndex(nextIndex);
-    }, [onShuffle, playingIndex, getRandomIndex, playList.items.length]);
+    };
 
-    const pauseSound = useCallback(async () => {
+    const pauseSound = () => {
         if (soundRef.current && isPlaying) {
-            console.log('Pausing Sound');
             soundRef.current.pause();
             setIsPlaying(false);
             clearInterval(intervalRef.current);
         }
-    }, [isPlaying]);
+    };
 
-    const stopSound = useCallback(async () => {
+    const stopSound = () => {
         if (soundRef.current) {
-            console.log('Stopping Sound');
             soundRef.current.stop(() => {
-                console.log('Sound stopped');
                 setIsPlaying(false);
                 clearInterval(intervalRef.current);
             });
         }
-    }, []);
+    };
 
     useEffect(() => {
         return () => {
@@ -134,7 +130,7 @@ export const PlayerProvider = ({ children }) => {
         if (isPlaying) {
             playSound();
         }
-    }, [playingIndex, isPlaying, playSound]);
+    }, [playingIndex, isPlaying]);
 
     return (
         <PlayerContext.Provider value={{
