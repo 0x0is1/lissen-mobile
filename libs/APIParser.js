@@ -1,3 +1,5 @@
+import { ToastAndroid } from "react-native";
+
 class ServiceProvider {
     constructor() {
         this.baseURL = 'https://www.jiosaavn.com/api.php?__call=';
@@ -5,7 +7,6 @@ class ServiceProvider {
 
     async request(dir) {
         try {            
-            console.log(`${this.baseURL}${dir}`);
             const response = await fetch(`${this.baseURL}${dir}`, {
                 headers: {
                     "Accept": "application/json, text/plain, */*",
@@ -16,7 +17,7 @@ class ServiceProvider {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.log(error);
+            ToastAndroid.show(error, ToastAndroid.LONG);
         }
     }
 
