@@ -7,7 +7,7 @@ import { Easing } from 'react-native-reanimated';
 
 const ProgressBarContainer = () => {
     const { progressBarOpacity, albumMode, currentDuration, totalDuration } = useContext(PlayerContext);
-    useEffect(()=>{
+    useEffect(() => {
         Animated.timing(progressBarOpacity, {
             toValue: albumMode ? 0 : 1,
             duration: 400,
@@ -15,15 +15,15 @@ const ProgressBarContainer = () => {
             easing: Easing.ease,
         }).start();
     }, [albumMode])
-    
+
     return (
-      <Animated.View
-          style={[
-              styles.progressBarContainer,
-              { opacity: progressBarOpacity },
-          ]}
-      >
-          <View style={styles.progressBar}>
+        <Animated.View
+            style={[
+                styles.progressBarContainer,
+                { opacity: progressBarOpacity },
+            ]}
+        >
+            <View style={styles.progressBar}>
                 <AnimatedCircularProgress
                     size={340}
                     width={8}
@@ -46,9 +46,9 @@ const ProgressBarContainer = () => {
                     )}
                 />
 
-          </View>
-      </Animated.View>
-  )
+            </View>
+        </Animated.View>
+    )
 }
 
 export default ProgressBarContainer
