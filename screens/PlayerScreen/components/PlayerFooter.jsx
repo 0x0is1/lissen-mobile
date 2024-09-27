@@ -6,11 +6,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Easing } from 'react-native-reanimated';
 
 const PlayerFooter = () => {
+    const isPlaying = true
+    const onRepeat = true
+    const onShuffle = true
     const {
-        footerHeightAnim, setOnShuffle, onShuffle, albumMode,
-        setOnRepeat, onRepeat, isPlaying, setIsPlaying,
-        playSound, stopSound, pauseSound, sound,
-        playingIndex, setPlayingIndex, playList
+        footerHeightAnim, albumMode,
     } = useContext(PlayerContext);
 
     useEffect(() => {
@@ -22,59 +22,20 @@ const PlayerFooter = () => {
         }).start();
     }, [albumMode]);
 
-    useEffect(() => {
-        if (sound) {
-            playSound();
-        }
-    }, [playingIndex]);
 
     const handleOnRepeat = () => {
-        setOnRepeat(!onRepeat);
     };
 
     const handlePlayPause = async () => {
-        try {
-            if (isPlaying) {
-                await pauseSound();
-            } else if (sound) {
-                await sound.play();
-                setIsPlaying(true);
-            } else {
-                await playSound();
-            }
-        } catch (error) {
-            console.error("Error during play/pause operation:", error);
-        }
     };
 
     const handleOnShuffle = () => {
-        setOnShuffle(!onShuffle);
     };
 
     const handleOnNext = () => {
-        stopSound();
-        setPlayingIndex(prevIndex => {
-            if (onShuffle) {
-                return Math.floor(Math.random() * playList.items.length);
-            } else if (onRepeat) {
-                return prevIndex;
-            } else {
-                return prevIndex < playList.items.length - 1 ? prevIndex + 1 : 0;
-            }
-        });
     };
 
     const handleOnPrevious = () => {
-        stopSound();
-        setPlayingIndex(prevIndex => {
-            if (onShuffle) {
-                return Math.floor(Math.random() * playList.items.length);
-            } else if (onRepeat) {
-                return prevIndex;
-            } else {
-                return prevIndex > 0 ? prevIndex - 1 : playList.items.length - 1;
-            }
-        });
     };
 
     return (
