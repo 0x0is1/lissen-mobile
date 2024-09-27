@@ -5,7 +5,8 @@ import { Easing } from 'react-native-reanimated';
 import { decode } from 'html-entities';
 
 const PlayerBanner = () => {
-    const { albumMode, heightAnim, panResponder } = useContext(PlayerContext)
+    const playingIndex = 0
+    const { albumMode, heightAnim, panResponder, playList } = useContext(PlayerContext)
     useEffect(() => {
         Animated.timing(heightAnim, {
             toValue: albumMode ? 350 : 500,
@@ -22,7 +23,9 @@ const PlayerBanner = () => {
       >
           <ImageBackground
               source={
-                  "../../../assets/albumcover.png"
+                  albumMode
+                      ? { uri: playList.albumCover }
+                      : { uri: playList.items[playingIndex].songCover }
               }
               style={styles.image}
               resizeMode="cover"
@@ -30,9 +33,17 @@ const PlayerBanner = () => {
               <View style={styles.overlay} />
           </ImageBackground>
           <Text style={styles.text}>
-              album/song name
+              {albumMode
+                  ? decode(playList.albumName.length > 15
+                      ? `${playList.albumName.substring(0, 15)}...`
+                      : playList.albumName)
+                  : decode(playList.items[playingIndex].songName.length > 15
+                      ? `${playList.items[playingIndex].songName.substring(0, 15)}...`
+                      : playList.items[playingIndex].songName)}
           </Text>
-          <Text style={[styles.text, styles.subtext]}>artists name</Text>
+          <Text style={[styles.text, styles.subtext]}>{decode(playList.artistName.length > 15
+              ? `${playList.artistName.substring(0, 15)}...`
+              : playList.artistName)}</Text>
       </Animated.View>
   )
 }
