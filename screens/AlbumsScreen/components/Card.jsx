@@ -7,7 +7,7 @@ import { PlayerContext } from '../../../contexts/PlayerContext';
 import { useNavigation } from '@react-navigation/native';
 
 const Card = ({ albumData, index }) => {
-    const { setPlayingIndex, setPlaylist, playList, playSound, stopSound } = useContext(PlayerContext);
+    const { setPlaylist } = useContext(PlayerContext);
     const navigation = useNavigation();
     return (
         <TouchableOpacity onPress={() => handleAlbum({

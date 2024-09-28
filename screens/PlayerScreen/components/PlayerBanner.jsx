@@ -4,8 +4,8 @@ import { PlayerContext } from '../../../contexts/PlayerContext'
 import { Easing } from 'react-native-reanimated';
 import { decode } from 'html-entities';
 
-const PlayerBanner = () => {
-    const { albumMode, heightAnim, panResponder, playList, playingIndex } = useContext(PlayerContext)
+const PlayerBanner = ({ playingIndex, playList }) => {
+    const { albumMode, heightAnim, panResponder } = useContext(PlayerContext)
     useEffect(() => {
         Animated.timing(heightAnim, {
             toValue: albumMode ? 350 : 500,
@@ -23,8 +23,8 @@ const PlayerBanner = () => {
           <ImageBackground
               source={
                   albumMode
-                      ? {uri: playList.albumCover}
-                      : {uri: playList.items[playingIndex].songCover}
+                      ? { uri: playList.albumCover }
+                      : { uri: playList.items[playingIndex].songCover }
               }
               style={styles.image}
               resizeMode="cover"
@@ -35,7 +35,7 @@ const PlayerBanner = () => {
               {albumMode
                   ? decode(playList.albumName.length > 15
                       ? `${playList.albumName.substring(0, 15)}...`
-                      : playList.albumName) 
+                      : playList.albumName)
                   : decode(playList.items[playingIndex].songName.length > 15
                       ? `${playList.items[playingIndex].songName.substring(0, 15)}...`
                       : playList.items[playingIndex].songName)}
