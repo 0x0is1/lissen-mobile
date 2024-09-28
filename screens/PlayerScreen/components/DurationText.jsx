@@ -2,9 +2,8 @@ import { StyleSheet, Text } from 'react-native'
 import React, { useContext } from 'react'
 import { PlayerContext } from '../../../contexts/PlayerContext';
 
-const DurationText = () => {
+const DurationText = ({currentDuration}) => {    
     const { formatTime } = useContext(PlayerContext);
-    const currentDuration = 200
     return (
         <Text style={styles.durationText}>{formatTime(currentDuration)}</Text>
     )

@@ -1,14 +1,25 @@
 import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { PlayerContext } from '../../../contexts/PlayerContext';
 import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Easing } from 'react-native-reanimated';
+import TrackPlayer, { RepeatMode, State } from 'react-native-track-player';
 
-const PlayerFooter = () => {
-    const isPlaying = true
-    const onRepeat = true
-    const onShuffle = true
+const PlayerFooter = ({ playState, onShuffle, setOnShuffle, playurlOverrider, playingIndex, nextActionOverrider, previousActionOverrider }) => {
+    const [onRepeat, setOnRepeat] = useState(false)
+    useEffect(()=>{
+        const fetchRepeat = async () => {
+            const repeatMode = await TrackPlayer.getRepeatMode();
+            if(repeatMode !== RepeatMode.Off){
+                setOnRepeat(true);
+            }
+            else{
+                setOnRepeat(false);
+            }
+        }
+        fetchRepeat();
+    }, [])
     const {
         footerHeightAnim, albumMode,
     } = useContext(PlayerContext);
@@ -23,19 +34,39 @@ const PlayerFooter = () => {
     }, [albumMode]);
 
 
-    const handleOnRepeat = () => {
+    const handleOnRepeat = async () => {
+        if(onRepeat){
+            await TrackPlayer.setRepeatMode(RepeatMode.Off)
+            setOnRepeat(false);
+        }
+        else {
+            await TrackPlayer.setRepeatMode(RepeatMode.Queue);
+            setOnRepeat(true);
+        }
     };
 
-    const handlePlayPause = async () => {
+    const handlePlayPause = async () => {        
+        if(playState===State.Playing){
+            await TrackPlayer.pause();
+        }
+        else if(playState===State.Paused) {
+            await TrackPlayer.play();
+        }
+        else if (playState===State.Error || playState===State.Ready || playState === State.None){
+            await playurlOverrider(playingIndex);
+        }
     };
 
     const handleOnShuffle = () => {
+        setOnShuffle(!onShuffle);
     };
 
-    const handleOnNext = () => {
+    const handleOnNext = async () => {
+        await nextActionOverrider();
     };
 
-    const handleOnPrevious = () => {
+    const handleOnPrevious = async () => {
+        await previousActionOverrider();
     };
 
     return (
@@ -66,7 +97,7 @@ const PlayerFooter = () => {
                     >
                         <Ionicons
                             style={styles.playPauseButton}
-                            name={isPlaying ? "pause" : "play"}
+                            name={playState===State.Paused || playState===State.None || playState===State.Error ? "play" : playState===State.Buffering || playState===State.Loading ? "reload" : "pause"}
                             size={30}
                             color="white"
                         />

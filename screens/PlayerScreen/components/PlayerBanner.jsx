@@ -4,9 +4,8 @@ import { PlayerContext } from '../../../contexts/PlayerContext'
 import { Easing } from 'react-native-reanimated';
 import { decode } from 'html-entities';
 
-const PlayerBanner = () => {
-    const playingIndex = 0
-    const { albumMode, heightAnim, panResponder, playList } = useContext(PlayerContext)
+const PlayerBanner = ({ playingIndex, playList }) => {
+    const { albumMode, heightAnim, panResponder } = useContext(PlayerContext)
     useEffect(() => {
         Animated.timing(heightAnim, {
             toValue: albumMode ? 350 : 500,
