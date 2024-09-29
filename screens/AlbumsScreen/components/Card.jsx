@@ -23,7 +23,7 @@ const Card = ({ albumData, index }) => {
                 imageStyle={styles.imageOverlay}
             >
                 <View style={styles.overlay} />
-                <Text style={styles.title}>{decode(albumData.title.length > 10
+                <Text style={styles.title}>{decode(albumData.title.length > 15
                     ? `${albumData.title.substring(0, 15)}...`
                     : albumData.title)}</Text>
             </ImageBackground>
