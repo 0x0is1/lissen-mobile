@@ -87,10 +87,10 @@ const handleAlbum = async ({
                 break;
             case "artist":
                 itemId = albumData.artistid || albumData.id;
-                data = await serviceProvider.getArtist(itemId);
+                data = await serviceProvider.getArtist(itemId, 50);
                 playData = {
                     albumName: data.name,
-                    artistName: '-',
+                    artistName: 'Artist',
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.topSongs.map((item, i) => {
                         return {
