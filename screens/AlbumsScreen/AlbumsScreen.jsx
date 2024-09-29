@@ -1,14 +1,13 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import Category from './components/Category';
 import ServiceProvider from '../../libs/APIParser';
-import Feather from "react-native-vector-icons/Feather";
+import Navbar from './components/Navbar';
 
 const AlbumsScreen = () => {
 	const serviceProvider = new ServiceProvider();
 	const [albumData, setAlbumData] = useState(null);
-	const handleSearch = () => {}
-	const handleDashboard = () => {}
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -30,14 +29,7 @@ const AlbumsScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.searchInput}>
-				<TouchableOpacity onPress={handleDashboard}>
-					<Feather name="menu" size={25} color="black" />
-				</TouchableOpacity>
-				<TouchableOpacity onPress={handleSearch}>
-					<Feather name="search" size={25} color="black" />
-				</TouchableOpacity>
-			</View>
+			<Navbar />
 			<FlatList
 				data={categories}
 				keyExtractor={(item) => item.id}
@@ -58,13 +50,6 @@ export default AlbumsScreen;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-	},
-
-	searchInput: {
-		flexDirection: 'row',
-		paddingHorizontal: 20,
-		paddingVertical: 15,
-		justifyContent: 'space-between',
 	},
 
 	albumsContainer: {
