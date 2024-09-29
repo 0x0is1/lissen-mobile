@@ -7,6 +7,7 @@ const setupPlayer = async () => {
     await TrackPlayer.setupPlayer()
 
     await TrackPlayer.updateOptions({
+        waitForBuffer: true,
         android: {
             appKilledPlaybackBehavior:
                 AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
