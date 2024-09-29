@@ -32,5 +32,6 @@ export default ModeSelector
 const styles = StyleSheet.create({
   selectorContainer: {
     paddingHorizontal: 10,
+    paddingBottom: 10
   }
 });
