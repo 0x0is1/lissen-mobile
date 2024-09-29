@@ -70,6 +70,7 @@ const PlayerScreen = () => {
                     title: decode(item.songName),
                     artwork: item.songCover,
                     artist: playList.artistName,
+                    isLiveStream: true,
                 };
                 await TrackPlayer.add(reparsedItem);
             }
@@ -91,8 +92,10 @@ const PlayerScreen = () => {
         if(event.duration-event.position<5){
             await nextActionOverrider();
         }
-
-        if ((event.buffered - event.position < 5) && (event.duration - event.position>5)){
+        const timeLeft = event.duration - event.position;
+        const timeBuffered = event.buffered - event.position;
+        
+        if ((timeLeft > 5) && (timeBuffered < 5)){
             await TrackPlayer.pause();
         }else{
             await TrackPlayer.play();
