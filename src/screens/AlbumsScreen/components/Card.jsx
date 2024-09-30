@@ -37,7 +37,7 @@ export default Card;
 const styles = StyleSheet.create({
     card: {
         maxWidth: 180,
-        minWidth: 180,
+        minWidth: 165,
         backgroundColor: '#fff',
         borderRadius: 8,
         shadowColor: '#000',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         elevation: 5,
         overflow: "hidden",
-        marginHorizontal: 15,
+        marginHorizontal: 8,
         marginVertical: 10,
     },
     image: {

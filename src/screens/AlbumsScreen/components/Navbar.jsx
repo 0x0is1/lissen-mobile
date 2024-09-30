@@ -27,6 +27,7 @@ export default Navbar
 
 const styles = StyleSheet.create({
     searchInput: {
+        marginTop: 15,
         flexDirection: 'row',
         paddingHorizontal: 20,
         paddingVertical: 15,

@@ -26,7 +26,7 @@ const PlayerFooter = ({ playState, onShuffle, setOnShuffle, playurlOverrider, pl
 
     useEffect(() => {
         Animated.timing(footerHeightAnim, {
-            toValue: albumMode ? 80 : 90,
+            toValue: 100,
             duration: 400,
             useNativeDriver: false,
             easing: Easing.ease,
