@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <PlayerProvider>
-      <StatusBar hidden={true}/>
+      <StatusBar backgroundColor={'transparent'} translucent/>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="AlbumsScreen">
           <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
