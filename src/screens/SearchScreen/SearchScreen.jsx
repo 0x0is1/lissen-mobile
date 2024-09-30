@@ -19,7 +19,7 @@ const SearchScreen = () => {
         clearTimeout(timer);
       }
       const newTimer = setTimeout(async () => {
-        const response = await serviceProvider.getSearch(searchInput, 1, searchType);
+        const response = await serviceProvider.getSearch(encodeURIComponent(searchInput), 1, searchType);
         setResp(response);
       }, 1000);
       setTimer(newTimer);
@@ -37,7 +37,7 @@ const SearchScreen = () => {
     <View>
       <Navbar setSearchInput={setSearchInput} />
       <ModeSelector setSearchType={setSearchType} searchType={searchType} />
-      <SearchList searchData={resp}/>
+      <SearchList searchData={!searchInput?resp:resp.results}/>
     </View>
   )
 }

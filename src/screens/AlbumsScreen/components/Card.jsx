@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 const Card = ({ albumData, index }) => {
     const { setPlaylist } = useContext(PlayerContext);
     const navigation = useNavigation();
+    albumData.title = albumData.title ? albumData.title : albumData.name;
     return (
         <TouchableOpacity onPress={() => handleAlbum({
             albumData: albumData,
@@ -18,7 +19,7 @@ const Card = ({ albumData, index }) => {
             navigation: navigation
         })} style={[styles.card, { height: index % 3 === 0 ? 250 : 180 }]}>
             <ImageBackground
-                source={{ uri: albumData.image.replace("150x150", "500x500") }}
+                source={{ uri: albumData.image.replace("150x150", "500x500").replace("50x50", "500x500") }}
                 style={styles.image}
                 imageStyle={styles.imageOverlay}
             >

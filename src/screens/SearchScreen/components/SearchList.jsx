@@ -2,7 +2,7 @@ import { StyleSheet, Text, ScrollView } from 'react-native'
 import React from 'react'
 import MasonryList from '@react-native-seoul/masonry-list'; 
 import Card from "../../AlbumsScreen/components/Card";
-const SearchList = ({ searchData }) => {
+const SearchList = ({ searchData }) => {  
   const renderCard = ({ item, index }) => (
     <Card albumData={item} index={index} />
   );

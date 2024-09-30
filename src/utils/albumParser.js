@@ -94,7 +94,7 @@ const handleAlbum = async ({
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.topSongs.map((item, i) => {
                         return {
-                            songName: item.album,
+                            songName: item.song,
                             duration: item.duration,
                             songCover: item.image.replace("150x150", "500x500"),
                             playUrl: item.encrypted_media_url,

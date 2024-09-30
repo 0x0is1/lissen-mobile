@@ -7,7 +7,7 @@ const ModeSelector = ({ setSearchType, searchType }) => {
     { label: "Playlists", value: 0 },
     { label: "Songs", value: 1 },
     { label: "Albums", value: 2 },
-    { label: "Artists", value: 3 }
+    { label: "Artists", value: 4 }
   ];
 
   return (
