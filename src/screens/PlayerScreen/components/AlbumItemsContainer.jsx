@@ -7,7 +7,7 @@ import { decode } from 'html-entities';
 import TrackPlayer from 'react-native-track-player';
 
 const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
-    const { formatTime, albumItemsOpacity, albumMode, playingIndex, setPlayingIndex } = useContext(PlayerContext);
+    const { formatTime, albumItemsOpacity, albumMode, playingIndex } = useContext(PlayerContext);
 
     useEffect(() => {
         Animated.timing(albumItemsOpacity, {

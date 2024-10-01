@@ -4,13 +4,15 @@ import TrackPlayer, {
 } from 'react-native-track-player'
 
 const setupPlayer = async () => {
-    await TrackPlayer.setupPlayer()
+    await TrackPlayer.setupPlayer({
+        autoHandleInterruptions: true
+    })
 
     await TrackPlayer.updateOptions({
         waitForBuffer: true,
         android: {
             appKilledPlaybackBehavior:
-                AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+                AppKilledPlaybackBehavior.PausePlayback,
             alwaysPauseOnInterruption: true,
         },
         capabilities: [
@@ -22,7 +24,7 @@ const setupPlayer = async () => {
         ],
         compactCapabilities: [Capability.Play, Capability.Pause],
         progressUpdateEventInterval: 1,
-    })        
+    })
 }
 
 export default setupPlayer
