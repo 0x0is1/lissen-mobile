@@ -55,7 +55,9 @@ export const PlayerProvider = ({ children }) => {
 
     const playurlOverrider = async (index) => {
         const trackPlayerQueue = await TrackPlayer.getQueue()
-        trackPlayerQueue[index].url = await serviceProvider.playByMediaUrl(trackPlayerQueue[index]?.url)
+        if(!trackPlayerQueue[index].url.includes("https://")){
+            trackPlayerQueue[index].url = await serviceProvider.playByMediaUrl(trackPlayerQueue[index]?.url)
+        } 
         await TrackPlayer.reset();
         await TrackPlayer.add(trackPlayerQueue);
         await TrackPlayer.skip(index);
