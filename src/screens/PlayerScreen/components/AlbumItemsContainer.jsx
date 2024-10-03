@@ -4,7 +4,6 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { PlayerContext } from '../../../contexts/PlayerContext';
 import { Easing } from 'react-native-reanimated';
 import { decode } from 'html-entities';
-import TrackPlayer from 'react-native-track-player';
 
 const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
     const { formatTime, albumItemsOpacity, albumMode, playingIndex } = useContext(PlayerContext);
