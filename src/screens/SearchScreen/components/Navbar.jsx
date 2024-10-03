@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         backgroundColor: '#f0f0f0',
         margin: 10,
+        marginTop: 25
     },
     searchInputBox: {
         flex: 1,
