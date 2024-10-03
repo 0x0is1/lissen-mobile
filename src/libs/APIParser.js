@@ -1,8 +1,8 @@
 import { ToastAndroid } from "react-native";
-
+import { Buffer } from "buffer";
 class ServiceProvider {
     constructor() {
-        this.baseURL = 'https://www.jiosaavn.com/api.php?__call=';
+        this.baseURL = Buffer.from('aHR0cHM6Ly93d3cuamlvc2Fhdm4uY29tL2FwaS5waHA/X19jYWxsPQ==', 'base64').toString('utf-8');
     }
 
     async request(dir) {
