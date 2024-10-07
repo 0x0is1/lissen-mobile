@@ -9,7 +9,7 @@ import setupPlayer from "./utils/setupPlayer";
 import TrackPlayer from 'react-native-track-player';
 import SearchScreen from './screens/SearchScreen/SearchScreen';
 import DashboardScreen from './screens/DashboardScreen/DashboardScreen';
-import { Text } from 'react-native';
+import AlbumViewerScreen from './screens/AlbumViewerScreen/AlbumViewerScreen';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +40,7 @@ export default function App() {
           <Stack.Screen name="AlbumsScreen" component={AlbumsScreen} />
           <Stack.Screen name="SearchScreen" component={SearchScreen} />
           <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
+          <Stack.Screen name="AlbumViewerScreen" component={AlbumViewerScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PlayerProvider>

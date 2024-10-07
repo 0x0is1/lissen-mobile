@@ -8,10 +8,26 @@ export const PlayerContext = createContext();
 
 export const PlayerProvider = ({ children }) => {
     const [albumMode, setAlbumMode] = useState(true);
-    const [playList, setPlaylist] = useState({ items: [] });
+    const [activePlaylistId, setactivePlaylistId] = useState('pl1');
+    const [playList, setPlaylist] = useState({
+        'pl1': {
+            albumName: "My Queue",
+            albumCover: require('../../assets/splash.png'),
+            items: [
+                {
+                    duration: "0",
+                    playUrl: "",
+                    songCover: require('../../assets/splash.png'),
+                    songName: 'No song to play',
+                    artistName: 'None'
+                }
+            ],
+        }
+    });
     const [playingIndex, setPlayingIndex] = useState(0);
     const [onShuffle, setOnShuffle] = useState(false);
     const [playState, setPlayState] = useState(State.None);
+    const [likedList, setLikedList] = useState({});
 
     const serviceProvider = new ServiceProvider();
 
@@ -36,60 +52,69 @@ export const PlayerProvider = ({ children }) => {
         })
     ).current;
 
-    const addTracks = async () => {
+    const addTracks = async (_playList, addAtIndex=-1) => {
         await TrackPlayer.reset();
-        for (const [index, item] of playList.items.entries()) {
+        for (const [index, item] of _playList.items.entries()) {
             const reparsedItem = {
                 id: index,
                 url: item.playUrl,
                 title: decode(item.songName),
                 artwork: item.songCover,
-                artist: playList.artistName,
+                artist: item.artistName || _playList.artistName,
                 isLiveStream: true,
             };
-            await TrackPlayer.add(reparsedItem);
+            if(addAtIndex!==-1){
+                await TrackPlayer.add(reparsedItem, addAtIndex);
+            } else{
+                await TrackPlayer.add(reparsedItem);
+            }
+            // await TrackPlayer.seekTo(0);
+            // setPlayingIndex(0);
         }
-        await TrackPlayer.seekTo(0);
-        setPlayingIndex(0);
     };
 
     const playurlOverrider = async (index) => {
         const trackPlayerQueue = await TrackPlayer.getQueue()
-        if(!trackPlayerQueue[index].url.includes("https://")){
+        if (!trackPlayerQueue[index].url.includes("https://")) {
             trackPlayerQueue[index].url = await serviceProvider.playByMediaUrl(trackPlayerQueue[index]?.url)
-        } 
+        }
         await TrackPlayer.reset();
         await TrackPlayer.add(trackPlayerQueue);
         await TrackPlayer.skip(index);
         await TrackPlayer.play();
         setPlayingIndex(index);
+        console.log(JSON.stringify(trackPlayerQueue[index]));
+        console.log(JSON.stringify(playList[activePlaylistId].items[index]));
     };
 
     const nextActionOverrider = async () => {
+        const _playList = playList[activePlaylistId];
         const repeatMode = await TrackPlayer.getRepeatMode();
         if (onShuffle) {
-            await playurlOverrider(Math.floor(Math.random() * playList.items.length));
+            await playurlOverrider(Math.floor(Math.random() * _playList.items.length));
         }
         else if (repeatMode !== 0) {
             await playurlOverrider(playingIndex);
         }
         else {
-            await playurlOverrider(playingIndex < playList.items.length - 1 ? playingIndex + 1 : 0)
+            await playurlOverrider(playingIndex < _playList.items.length - 1 ? playingIndex + 1 : 0)
         }
     }
 
     const previousActionOverrider = async () => {
+        const _playList = playList[activePlaylistId];
         const repeatMode = await TrackPlayer.getRepeatMode();
         if (onShuffle) {
-            await playurlOverrider(Math.floor(Math.random() * playList.items.length));
+            await playurlOverrider(Math.floor(Math.random() * _playList.items.length));
         }
         else if (repeatMode !== 0) {
             await playurlOverrider(playingIndex);
         }
         else {
-            await playurlOverrider(playingIndex > 0 ? playingIndex - 1 : playList.items.length - 1)
+            await playurlOverrider(playingIndex > 0 ? playingIndex - 1 : _playList.items.length - 1)
         }
     }
+
     useTrackPlayerEvents([Event.PlaybackState], async (event) => {
         setPlayState(event.state);
     })
@@ -152,21 +177,27 @@ export const PlayerProvider = ({ children }) => {
     return (
         <PlayerContext.Provider value={{
             albumMode,
-            playList, setPlaylist,
+            playList,
             heightAnim,
             progressBarOpacity,
             albumItemsOpacity,
             footerHeightAnim,
             panResponder,
-            formatTime,
             playingIndex,
             onShuffle,
-            setOnShuffle,
             playState,
+            likedList,
+            activePlaylistId,
+            formatTime,
+            setOnShuffle,
             playurlOverrider,
             nextActionOverrider,
             previousActionOverrider,
             addTracks,
+            setLikedList,
+            setAlbumMode,
+            setPlaylist,
+            setactivePlaylistId
         }}>
             {children}
         </PlayerContext.Provider>

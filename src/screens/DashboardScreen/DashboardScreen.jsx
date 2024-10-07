@@ -12,6 +12,7 @@ import LibraryScreen from "../LibraryScreen/LibraryScreen";
 import Octicons from "react-native-vector-icons/Octicons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Footer from './components/Footer';
+import PlayerScreen from '../PlayerScreen/PlayerScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -91,7 +92,15 @@ const DashboardScreen = ({ navigation }) => {
           drawerItemStyle: { display: 'none' }
         }}
       />
-
+      <Drawer.Screen
+        name="PlayerScreen"
+        component={PlayerScreen}
+        options={{
+          title: "Player",
+          drawerIcon: ({ color }) => <Octicons name="play" size={25} color={color} />,
+          headerShown: false
+        }}
+      />
     </Drawer.Navigator>
   );
 };

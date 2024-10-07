@@ -14,7 +14,14 @@ const PlayerBanner = ({ playingIndex, playList }) => {
             easing: Easing.ease,
         }).start();
     }, [albumMode])
-    
+
+    const getImageSource = (imagePath) => {
+        if (typeof imagePath === 'string' && imagePath.startsWith('http')) {
+            return { uri: imagePath };
+        } else {
+            return imagePath;
+        }
+    };
   return (
       <Animated.View
           style={[styles.imgContainer, { height: heightAnim }]}
@@ -23,8 +30,8 @@ const PlayerBanner = ({ playingIndex, playList }) => {
           <ImageBackground
               source={
                   albumMode
-                      ? { uri: playList.albumCover }
-                      : { uri: playList.items[playingIndex].songCover }
+                      ? getImageSource(playList.albumCover)
+                      : getImageSource(playList.items[playingIndex].songCover)
               }
               style={styles.image}
               resizeMode="cover"
@@ -40,9 +47,9 @@ const PlayerBanner = ({ playingIndex, playList }) => {
                       ? `${playList.items[playingIndex].songName.substring(0, 15)}...`
                       : playList.items[playingIndex].songName)}
           </Text>
-          <Text style={[styles.text, styles.subtext]}>{decode(playList.artistName.length > 15
-              ? `${playList.artistName.substring(0, 15)}...`
-              : playList.artistName)}</Text>
+          <Text style={[styles.text, styles.subtext]}>{decode(playList.items[playingIndex].artistName.length > 15
+              ? `${playList.items[playingIndex].artistName.substring(0, 15)}...`
+              : playList.items[playingIndex].artistName)}</Text>
       </Animated.View>
   )
 }
