@@ -30,9 +30,9 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
                         index === playingIndex ? { fontWeight: '800' } : { fontWeight: '500' },
                     ]}
                 >
-                    {decode(item.songName).length > 30
-                        ? `${decode(item.songName).substring(0, 30)}...`
-                        : decode(item.songName)}
+                    {decode(item.title).length > 30
+                        ? `${decode(item.title).substring(0, 30)}...`
+                        : decode(item.title)}
                 </Text>
                 <Text
                     style={[
@@ -47,12 +47,17 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
     );
 
     return (
+        playList && playList.length > 0 ?
         <Animated.View style={[styles.albumItemsContainer, { opacity: albumItemsOpacity }]}>
             <FlatList
-                data={playList.items}
+                data={playList}
                 renderItem={renderAlbumItems}
                 keyExtractor={(item, index) => index.toString()}
             />
+        </Animated.View>
+        :
+        <Animated.View style={[styles.albumItemsContainer, { opacity: albumItemsOpacity }]}>
+            <Text style={styles.placeholder}>No items to display</Text>
         </Animated.View>
     );
 };
@@ -60,6 +65,10 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
 export default AlbumItemsContainer;
 
 const styles = StyleSheet.create({
+    placeholder: {
+        height: 300
+    },
+    
     albumItems: {
         flexDirection: 'row',
         minWidth: '100%',

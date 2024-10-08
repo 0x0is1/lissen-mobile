@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const UtilityButtons = ({ trackList }) => {
     const [addedToPlaylist, setAddedToPlaylist] = useState(false);
-    const { activePlaylistId, addTracks, setPlaylist, playList, likedList } = useContext(PlayerContext);
+    const { activePlaylistId, addTracks, likedList } = useContext(PlayerContext);
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
@@ -24,7 +24,7 @@ const UtilityButtons = ({ trackList }) => {
 
             <TouchableOpacity
                 onPress={() =>
-                    utilityButtonActions("play", { trackList, setPlaylist, playList, activePlaylistId, addTracks, setAddedToPlaylist, addedToPlaylist, navigation })
+                    utilityButtonActions("play", { trackList, activePlaylistId, addTracks, setAddedToPlaylist, addedToPlaylist, navigation })
                 }
                 style={[styles.button, { backgroundColor: "#38c999", borderWidth: 0 }]}
                 accessibilityLabel="Play"

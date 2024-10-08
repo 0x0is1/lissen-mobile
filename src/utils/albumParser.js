@@ -3,7 +3,7 @@ import ServiceProvider from '../libs/APIParser';
 const serviceProvider = new ServiceProvider();
 
 const handleAlbum = async ({
-    albumData, image_, title_, setPlaylist, navigation
+    albumData, image_, title_, navigation
 }) => {
     let playData = {};
     const albumType = albumData.type;
@@ -24,6 +24,7 @@ const handleAlbum = async ({
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.list.map((item, i) => {
                         return {
+                            id: item.id,
                             songName: item.title,
                             duration: item.more_info.duration,
                             songCover: item.image.replace("150x150", "500x500"),
@@ -44,6 +45,7 @@ const handleAlbum = async ({
                     items: Object.keys(data).map((key, i) => {
                         const item = data[key].song;
                         return {
+                            id: item.id,
                             songName: item.title,
                             duration: item.more_info.duration,
                             songCover: item.image.replace("150x150", "500x500"),
@@ -62,6 +64,7 @@ const handleAlbum = async ({
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: [
                         {
+                            id: item.id,
                             songName: data.song,
                             duration: data.duration,
                             songCover: data.image.replace("150x150", "500x500"),
@@ -80,6 +83,7 @@ const handleAlbum = async ({
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.songs.map((item, i) => {
                         return {
+                            id: item.id,
                             songName: item.song,
                             duration: item.duration,
                             songCover: item.image.replace("150x150", "500x500"),
@@ -98,6 +102,7 @@ const handleAlbum = async ({
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.topSongs.map((item, i) => {
                         return {
+                            id: item.id,
                             songName: item.song,
                             duration: item.duration,
                             songCover: item.image.replace("150x150", "500x500"),
@@ -112,7 +117,6 @@ const handleAlbum = async ({
         }
 
         if (playData.items && playData.items.length > 0) {
-            // setPlaylist(playData);
             navigation.navigate('AlbumViewerScreen', {
                 data: playData
             });

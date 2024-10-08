@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View, Animated, ImageBackground } from 'react-native'
-import React, { useEffect, useContext } from 'react'
-import { PlayerContext } from '../../../contexts/PlayerContext'
+import { StyleSheet, Text, View, Animated, ImageBackground } from 'react-native';
+import React, { useEffect, useContext, useState } from 'react';
+import { PlayerContext } from '../../../contexts/PlayerContext';
 import { Easing } from 'react-native-reanimated';
 import { decode } from 'html-entities';
 
+const getDecodedText = (text, maxLength) => {
+    const decodedText = decode(text || 'None');
+    return decodedText.length > maxLength
+        ? `${decodedText.substring(0, maxLength)}...`
+        : decodedText;
+};
+
 const PlayerBanner = ({ playingIndex, playList }) => {
-    const { albumMode, heightAnim, panResponder } = useContext(PlayerContext)
+    const { albumMode, heightAnim, panResponder } = useContext(PlayerContext);
+
     useEffect(() => {
         Animated.timing(heightAnim, {
             toValue: albumMode ? 350 : 500,
@@ -13,7 +21,7 @@ const PlayerBanner = ({ playingIndex, playList }) => {
             useNativeDriver: false,
             easing: Easing.ease,
         }).start();
-    }, [albumMode])
+    }, [albumMode]);
 
     const getImageSource = (imagePath) => {
         if (typeof imagePath === 'string' && imagePath.startsWith('http')) {
@@ -22,54 +30,55 @@ const PlayerBanner = ({ playingIndex, playList }) => {
             return imagePath;
         }
     };
-  return (
-      <Animated.View
-          style={[styles.imgContainer, { height: heightAnim }]}
-          {...panResponder.panHandlers}
-      >
-          <ImageBackground
-              source={
-                  albumMode
-                      ? getImageSource(playList.albumCover)
-                      : getImageSource(playList.items[playingIndex].songCover)
-              }
-              style={styles.image}
-              resizeMode="cover"
-          >
-              <View style={styles.overlay} />
-          </ImageBackground>
-          <Text style={styles.text}>
-              {albumMode
-                  ? decode(playList.albumName.length > 15
-                      ? `${playList.albumName.substring(0, 15)}...`
-                      : playList.albumName)
-                  : decode(playList.items[playingIndex].songName.length > 15
-                      ? `${playList.items[playingIndex].songName.substring(0, 15)}...`
-                      : playList.items[playingIndex].songName)}
-          </Text>
-          <Text style={[styles.text, styles.subtext]}>{decode(playList.items[playingIndex].artistName.length > 15
-              ? `${playList.items[playingIndex].artistName.substring(0, 15)}...`
-              : playList.items[playingIndex].artistName)}</Text>
-      </Animated.View>
-  )
-}
 
-export default PlayerBanner
+    return (
+        (playList) && (
+            <Animated.View
+                style={[styles.imgContainer, { height: heightAnim }]}
+                {...panResponder.panHandlers}
+            >
+                <ImageBackground
+                    source={
+                        albumMode
+                            ? getImageSource(playList?.items?.[0]?.songCover || require('../../../../assets/splash.png'))
+                            : getImageSource((playList[playingIndex]?.artwork) || require('../../../../assets/splash.png'))
+                    }
+                    style={styles.image}
+                    resizeMode="cover"
+                >
+                    <View style={styles.overlay} />
+                </ImageBackground>
+                <Text style={styles.text}>
+                    {albumMode
+                        ? "My Queue"
+                        : getDecodedText(playList[playingIndex]?.title || 'Unknown Title', 15)}
+                </Text>
+                <Text style={[styles.text, styles.subtext]}>
+                    {
+                    !albumMode 
+                    ? getDecodedText(playList[playingIndex]?.artist || playList?.items?.[playingIndex]?.artistName || 'Unknown Artist', 15)
+                    : "You"}
+                </Text>
+            </Animated.View>
+        )
+    );
+};
+
+export default PlayerBanner;
 
 const styles = StyleSheet.create({
-
     overlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0, 0, 0, 0.35)',
     },
     imgContainer: {
         width: 250,
-        overflow: "hidden",
-        alignItems: "center",
-        justifyContent: "center",
+        overflow: 'hidden',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderBottomLeftRadius: 150,
         borderBottomRightRadius: 150,
-        shadowColor: "#010101",
+        shadowColor: '#010101',
         shadowOffset: {
             width: 0,
             height: 12,
@@ -79,20 +88,20 @@ const styles = StyleSheet.create({
         elevation: 24,
     },
     image: {
-        width: "100%",
-        height: "100%",
+        width: '100%',
+        height: '100%',
     },
     text: {
-        position: "absolute",
+        position: 'absolute',
         fontSize: 18,
         bottom: 80,
-        color: "#fff",
-        fontWeight: "500",
+        color: '#fff',
+        fontWeight: '500',
     },
     subtext: {
         bottom: 50,
         fontSize: 12,
-        fontWeight: "300",
-        textTransform: "uppercase",
+        fontWeight: '300',
+        textTransform: 'uppercase',
     },
-})
+});

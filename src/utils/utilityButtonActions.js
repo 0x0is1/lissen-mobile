@@ -3,15 +3,6 @@ import { ToastAndroid } from "react-native";
 const utilityButtonActions = async (action, props = {}) => {
     const handlePlayAction = async () => {
         if (props.addedToPlaylist) return;
-        const _playList = props.playList;
-        _playList[props.activePlaylistId] = {
-            ..._playList[props.activePlaylistId],
-            items: [
-                ...(_playList[props.activePlaylistId].items[0].duration !== "0" ? _playList[props.activePlaylistId].items : []),
-                ...props.trackList.items
-            ],
-        }
-        props.setPlaylist(_playList);
         props.addTracks(props.trackList)
         props.setAddedToPlaylist(true);
         ToastAndroid.show(`${props.trackList.items.length} items added to playlist`, ToastAndroid.SHORT);

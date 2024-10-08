@@ -22,7 +22,7 @@ export default function App() {
         if (!playerInitialized) {
           await setupPlayer();
           setPlayerInitialized(true);
-          return () => TrackPlayer.destroy();
+          return async () => await TrackPlayer.destroy();
         }
       } catch (error) {
         console.error('Error setting up player', error);
