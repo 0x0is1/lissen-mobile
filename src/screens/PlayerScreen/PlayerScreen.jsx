@@ -3,7 +3,6 @@ import {
     View,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { PlayerContext } from '../../contexts/PlayerContext';
 import PlayerFooter from "./components/PlayerFooter";
 import PlayerBanner from "./components/PlayerBanner";

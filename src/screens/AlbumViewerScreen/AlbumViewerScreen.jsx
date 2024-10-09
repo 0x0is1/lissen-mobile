@@ -3,7 +3,7 @@ import {
     View,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { PlayerContext } from '../../contexts/PlayerContext';
 import PlayerFooter from "./components/PlayerFooter";
 import PlayerBanner from "./components/PlayerBanner";
@@ -15,7 +15,10 @@ import UtilityButtons from "./components/UtilityButtons";
 
 const AlbumViewerScreen = () => {
     const {
-        albumMode, playingIndex, onShuffle, setOnShuffle, playState, playurlOverrider, nextActionOverrider, previousActionOverrider
+        albumMode, playingIndex, onShuffle,
+        setOnShuffle, playState, playurlOverrider,
+        nextActionOverrider, previousActionOverrider,
+        isTrackAddingCompleted
     } = useContext(PlayerContext);
     const route = useRoute()
     const trackList = route.params.data
@@ -28,13 +31,8 @@ const AlbumViewerScreen = () => {
             const queueres = await TrackPlayer.getQueue();
             setQueue(queueres);
         };
-        fetchQueue();
-    }, []);
-
-    useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {        
-        const queueres = await TrackPlayer.getQueue();
-        setQueue(queueres);
-    });
+        isTrackAddingCompleted && fetchQueue();
+    }, [isTrackAddingCompleted]);
 
     useTrackPlayerEvents([Event.PlaybackProgressUpdated], async (event) => {
         setTotalDuration(event.duration);
@@ -42,14 +40,14 @@ const AlbumViewerScreen = () => {
     });
     
     return (
-        <View style={styles.container}>
+        trackList && queue && <View style={styles.container}>
             {
                 albumMode
                 ? (
                     <>
                             <PlayerBanner playingIndex={playingIndex} playList={trackList} />
                             <UtilityButtons trackList={trackList} />
-                            <AlbumItemsContainer trackList={trackList} playurlOverrider={playurlOverrider} />
+                            <AlbumItemsContainer trackList={trackList} playurlOverrider={playurlOverrider} queue={queue}/>
                         </>
                     ) : (
                         <>

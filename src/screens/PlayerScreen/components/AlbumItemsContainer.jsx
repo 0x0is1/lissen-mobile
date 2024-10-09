@@ -27,7 +27,7 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
                 <Text
                     style={[
                         styles.songItem,
-                        index === playingIndex ? { fontWeight: '800' } : { fontWeight: '500' },
+                        item.id === (playList[playingIndex]?.id || undefined) ? { fontWeight: '800' } : { fontWeight: '500' },
                     ]}
                 >
                     {decode(item.title).length > 30
@@ -37,7 +37,7 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
                 <Text
                     style={[
                         styles.songItem,
-                        index === playingIndex ? { fontWeight: '800' } : { fontWeight: '500' },
+                        item.id === (playList[playingIndex]?.id || undefined) ? { fontWeight: '800' } : { fontWeight: '500' },
                     ]}
                 >
                     {formatTime(item.duration)}
