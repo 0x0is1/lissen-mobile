@@ -2,12 +2,9 @@ import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react
 import React from 'react';
 import { decode } from 'html-entities';
 import handleAlbum from "../../../utils/albumParser";
-import { useContext } from 'react';
-import { PlayerContext } from '../../../contexts/PlayerContext';
 import { useNavigation } from '@react-navigation/native';
 
 const Card = ({ albumData, index }) => {
-    const { setPlaylist } = useContext(PlayerContext);
     const navigation = useNavigation();
     albumData.title = albumData.title ? albumData.title : albumData.name;
     return (
@@ -15,7 +12,6 @@ const Card = ({ albumData, index }) => {
             albumData: albumData,
             image_: albumData.image,
             title_: albumData.title,
-            setPlaylist: setPlaylist,
             navigation: navigation
         })} style={[styles.card, { height: index % 3 === 0 ? 250 : 180 }]}>
             <ImageBackground

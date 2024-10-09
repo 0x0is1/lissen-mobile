@@ -10,34 +10,43 @@ import PlayerBanner from "./components/PlayerBanner";
 import AlbumItemsContainer from "./components/AlbumItemsContainer";
 import ProgressBarContainer from "./components/ProgressBarContainer";
 import DurationText from "./components/DurationText";
-import { Event, useTrackPlayerEvents } from 'react-native-track-player'
+import TrackPlayer, { Event, State, useTrackPlayerEvents } from 'react-native-track-player'
 
 const PlayerScreen = () => {
     const {
-        albumMode, playList, addTracks, playingIndex, onShuffle, setOnShuffle, playState, playurlOverrider, nextActionOverrider, previousActionOverrider
+        albumMode, playingIndex, onShuffle, setOnShuffle, playState, playurlOverrider, nextActionOverrider, previousActionOverrider, isTrackAddingCompleted
     } = useContext(PlayerContext);
-
     const [currentDuration, setCurrentDuration] = useState(0);
     const [totalDuration, setTotalDuration] = useState(0);
-
+    const [queue, setQueue] = useState(null);
+    
     useTrackPlayerEvents([Event.PlaybackProgressUpdated], async (event) => {
         setTotalDuration(event.duration);
         setCurrentDuration(event.position);
     });
     
     useEffect(() => {
-        addTracks();
-    }, [playList]);
-
-    const navigation = useNavigation();
+        if (isTrackAddingCompleted) {
+            const fetchQueue = async () => {
+                const queueres = await TrackPlayer.getQueue();
+                setQueue(queueres);
+            };
+            fetchQueue();
+        }
+    }, [isTrackAddingCompleted]);
+    
+    useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async (event) => {
+        const queueres = await TrackPlayer.getQueue();
+        setQueue(queueres);
+    });
 
     return (
-        <View style={styles.container}>
-            <PlayerBanner playingIndex={playingIndex} playList={playList} />
+        isTrackAddingCompleted && <View style={styles.container}>
+            <PlayerBanner playingIndex={playingIndex} playList={queue} />
             {
                 albumMode
                     ? (
-                        <AlbumItemsContainer playList={playList} playurlOverrider={playurlOverrider} />
+                        <AlbumItemsContainer playList={queue} playurlOverrider={playurlOverrider} />
                     ) : (
                         <>
                             <ProgressBarContainer totalDuration={totalDuration} currentDuration={currentDuration}/>

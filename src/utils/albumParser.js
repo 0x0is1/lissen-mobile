@@ -3,7 +3,7 @@ import ServiceProvider from '../libs/APIParser';
 const serviceProvider = new ServiceProvider();
 
 const handleAlbum = async ({
-    albumData, image_, title_, setPlaylist, navigation
+    albumData, image_, title_, navigation
 }) => {
     let playData = {};
     const albumType = albumData.type;
@@ -19,15 +19,17 @@ const handleAlbum = async ({
                 itemId = albumData.perma_url.split("/").slice(-1);
                 data = await serviceProvider.getAlbumById(itemId);
                 playData = {
+                    id: itemId,
                     albumName: data.title,
-                    artistName: data.subtitle,
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.list.map((item, i) => {
                         return {
+                            id: item.id,
                             songName: item.title,
                             duration: item.more_info.duration,
                             songCover: item.image.replace("150x150", "500x500"),
                             playUrl: item.more_info.encrypted_media_url,
+                            artistName: data.subtitle,
                         };
                     }),
                 };
@@ -37,16 +39,18 @@ const handleAlbum = async ({
                 data = await serviceProvider.getStationById(itemId);
                 delete data["stationid"];
                 playData = {
+                    id: itemId,
                     albumName: title_,
-                    artistName: 'Various Artists',
                     albumCover: image_.replace("150x150", "500x500"),
                     items: Object.keys(data).map((key, i) => {
                         const item = data[key].song;
                         return {
+                            id: item.id,
                             songName: item.title,
                             duration: item.more_info.duration,
                             songCover: item.image.replace("150x150", "500x500"),
                             playUrl: item.more_info.encrypted_media_url,
+                            artistName: 'Various Artists',
                         };
                     }),
                 };
@@ -55,15 +59,17 @@ const handleAlbum = async ({
                 itemId = albumData.id;
                 data = await serviceProvider.getSongById(itemId);
                 playData = {
+                    id: itemId,
                     albumName: data.song,
-                    artistName: data.primary_artists,
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: [
                         {
+                            id: item.id,
                             songName: data.song,
                             duration: data.duration,
                             songCover: data.image.replace("150x150", "500x500"),
                             playUrl: data.encrypted_media_url,
+                            artistName: data.primary_artists,
                         }
                     ]
                 };
@@ -72,15 +78,17 @@ const handleAlbum = async ({
                 itemId = albumData.id;
                 data = await serviceProvider.getPlaylistById(itemId);
                 playData = {
+                    id: itemId,
                     albumName: data.listname,
-                    artistName: data.firstname,
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.songs.map((item, i) => {
                         return {
+                            id: item.id,
                             songName: item.song,
                             duration: item.duration,
                             songCover: item.image.replace("150x150", "500x500"),
                             playUrl: item.encrypted_media_url,
+                            artistName: data.firstname,
                         };
                     }),
                 };
@@ -89,15 +97,17 @@ const handleAlbum = async ({
                 itemId = albumData.artistid || albumData.id;
                 data = await serviceProvider.getArtist(itemId, 50);
                 playData = {
+                    id: itemId,
                     albumName: data.name,
-                    artistName: 'Artist',
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: data.topSongs.map((item, i) => {
                         return {
+                            id: item.id,
                             songName: item.song,
                             duration: item.duration,
                             songCover: item.image.replace("150x150", "500x500"),
                             playUrl: item.encrypted_media_url,
+                            artistName: 'Artist',
                         };
                     }),
                 };
@@ -107,8 +117,9 @@ const handleAlbum = async ({
         }
 
         if (playData.items && playData.items.length > 0) {
-            setPlaylist(playData);
-            navigation.navigate('PlayerScreen');
+            navigation.navigate('AlbumViewerScreen', {
+                data: playData
+            });
         }
     } catch (error) {
         console.error('Error handling album:', error);

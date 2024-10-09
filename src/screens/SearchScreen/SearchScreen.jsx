@@ -34,7 +34,7 @@ const SearchScreen = () => {
   }, [searchInput, searchType]);
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Navbar setSearchInput={setSearchInput} />
       <ModeSelector setSearchType={setSearchType} searchType={searchType} />
       <SearchList searchData={Array.isArray(resp) ? resp : []} />

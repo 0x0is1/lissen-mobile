@@ -50,14 +50,11 @@ const PlayerBanner = ({ playingIndex, playList }) => {
                 </ImageBackground>
                 <Text style={styles.text}>
                     {albumMode
-                        ? "My Queue"
+                        ? getDecodedText(playList?.albumName || 'Unknown Album', 15)
                         : getDecodedText(playList[playingIndex]?.title || 'Unknown Title', 15)}
                 </Text>
                 <Text style={[styles.text, styles.subtext]}>
-                    {
-                    !albumMode 
-                    ? getDecodedText(playList[playingIndex]?.artist || playList?.items?.[playingIndex]?.artistName || 'Unknown Artist', 15)
-                    : "You"}
+                    {getDecodedText(playList[playingIndex]?.artist || playList?.items?.[playingIndex]?.artistName || 'Unknown Artist', 15)}
                 </Text>
             </Animated.View>
         )

@@ -9,36 +9,38 @@ import setupPlayer from "./utils/setupPlayer";
 import TrackPlayer from 'react-native-track-player';
 import SearchScreen from './screens/SearchScreen/SearchScreen';
 import DashboardScreen from './screens/DashboardScreen/DashboardScreen';
+import AlbumViewerScreen from './screens/AlbumViewerScreen/AlbumViewerScreen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [playerInitialized, setPlayerInitialized] = useState(false);
-  
+
   useEffect(() => {
     const initializePlayer = async () => {
       try {
-        if(!playerInitialized){
+        if (!playerInitialized) {
           await setupPlayer();
-          setPlayerInitialized(true)
-          return () => TrackPlayer.destroy()
+          setPlayerInitialized(true);
+          return async () => await TrackPlayer.destroy();
         }
       } catch (error) {
         console.error('Error setting up player', error);
       }
     };
     initializePlayer();
-  }, []);
+  }, [playerInitialized]);
 
   return (
     <PlayerProvider>
-      <StatusBar backgroundColor={'transparent'} translucent/>
+      <StatusBar backgroundColor={'transparent'} translucent />
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="AlbumsScreen">
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="DashboardScreen">
           <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
           <Stack.Screen name="AlbumsScreen" component={AlbumsScreen} />
           <Stack.Screen name="SearchScreen" component={SearchScreen} />
           <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
+          <Stack.Screen name="AlbumViewerScreen" component={AlbumViewerScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PlayerProvider>

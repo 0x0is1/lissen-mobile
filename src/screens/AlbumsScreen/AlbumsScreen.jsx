@@ -29,7 +29,7 @@ const AlbumsScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<Navbar />
+			{/* <Navbar /> */}
 			<FlatList
 				data={categories}
 				keyExtractor={(item) => item.id}

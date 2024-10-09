@@ -1,4 +1,4 @@
-import { StyleSheet, Text, ScrollView } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 import MasonryList from '@react-native-seoul/masonry-list'; 
 import Card from "../../AlbumsScreen/components/Card";
@@ -7,7 +7,6 @@ const SearchList = ({ searchData }) => {
     <Card albumData={item} index={index} />
   );
   return searchData && (
-    <ScrollView style={styles.container}>
       <MasonryList
         data={searchData}
         keyExtractor={(item) => item.id}
@@ -16,7 +15,6 @@ const SearchList = ({ searchData }) => {
         renderItem={renderCard}
         onEndReachedThreshold={0.1}
       />
-    </ScrollView>
   )
 }
 
@@ -24,5 +22,6 @@ export default SearchList
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
   },
 })

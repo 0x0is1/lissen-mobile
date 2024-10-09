@@ -1,7 +1,10 @@
 {
   "name": "lissen-mobile",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "./src/index.js",
+  "repository": {
+    "url": "https://github.com/0x0is1/lissen-mobile"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -15,12 +18,15 @@
     "@react-native-community/slider": "^4.5.2",
     "@react-native-picker/picker": "2.7.5",
     "@react-native-seoul/masonry-list": "^1.4.2",
+    "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/stack": "^6.4.1",
     "axios": "^1.7.3",
     "expo": "~51.0.34",
     "expo-dev-client": "~4.0.27",
+    "expo-font": "^12.0.10",
     "expo-status-bar": "~1.12.1",
+    "expo-updates": "~0.25.25",
     "html-entities": "^2.5.2",
     "react": "18.2.0",
     "react-native": "0.74.5",
@@ -38,8 +44,7 @@
     "react-native-switch-selector": "^2.3.0",
     "react-native-track-player": "^4.1.1",
     "react-native-vector-icons": "^10.1.0",
-    "rn-circular-slider": "^1.1.0",
-    "expo-updates": "~0.25.25"
+    "rn-circular-slider": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

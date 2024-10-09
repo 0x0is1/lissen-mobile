@@ -1,13 +1,14 @@
 import { Animated, StyleSheet, Text, View } from 'react-native';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { PlayerContext } from '../../../contexts/PlayerContext';
 import { Easing } from 'react-native-reanimated';
 import { decode } from 'html-entities';
+import TrackPlayer from 'react-native-track-player';
 
-const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
-    const { formatTime, albumItemsOpacity, albumMode, playingIndex } = useContext(PlayerContext);
-
+const AlbumItemsContainer = ({ trackList, playurlOverrider }) => {
+    const { formatTime, albumItemsOpacity, albumMode, playingIndex, addTracks } = useContext(PlayerContext);
+    const [queue, setQueue] = useState(null);
     useEffect(() => {
         Animated.timing(albumItemsOpacity, {
             toValue: albumMode ? 1 : 0,
@@ -17,22 +18,36 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
         }).start();
     }, [albumMode]);
 
-    const onItemPlayPressed = async (index) => {        
-        await playurlOverrider(index);
+    useEffect(()=>{
+        const queueLoader = async () => {
+            const queueres = await TrackPlayer.getQueue();
+            setQueue(queueres);
+        }
+        queueLoader();
+    }, [])
+    const onItemPlayPressed = async (index) => {  
+        const _trackList = {
+            ...trackList,
+            items: [
+                trackList.items[index],
+            ]
+        };
+        addTracks(_trackList, playingIndex);
+        await playurlOverrider(playingIndex);
     };
 
     const renderAlbumItems = ({ item, index }) => (
-        <TouchableOpacity onPress={() => onItemPlayPressed(index)}>
+        queue && <TouchableOpacity onPress={() => onItemPlayPressed(index)}>
             <View style={styles.albumItems}>
                 <Text
                     style={[
                         styles.songItem,
-                        index === playingIndex ? { fontWeight: '800' } : { fontWeight: '500' },
+                        item.id === queue[playingIndex].id ? { fontWeight: '800' } : { fontWeight: '500' },
                     ]}
                 >
-                    {decode(item.title).length > 30
-                        ? `${decode(item.title).substring(0, 30)}...`
-                        : decode(item.title)}
+                    {decode(item.songName).length > 30
+                        ? `${decode(item.songName).substring(0, 30)}...`
+                        : decode(item.songName)}
                 </Text>
                 <Text
                     style={[
@@ -47,17 +62,12 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
     );
 
     return (
-        playList && playList.length > 0 ?
         <Animated.View style={[styles.albumItemsContainer, { opacity: albumItemsOpacity }]}>
             <FlatList
-                data={playList}
+                data={trackList.items}
                 renderItem={renderAlbumItems}
                 keyExtractor={(item, index) => index.toString()}
             />
-        </Animated.View>
-        :
-        <Animated.View style={[styles.albumItemsContainer, { opacity: albumItemsOpacity }]}>
-            <Text style={styles.placeholder}>No items to display</Text>
         </Animated.View>
     );
 };
@@ -65,10 +75,6 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
 export default AlbumItemsContainer;
 
 const styles = StyleSheet.create({
-    placeholder: {
-        height: 300
-    },
-    
     albumItems: {
         flexDirection: 'row',
         minWidth: '100%',
@@ -78,8 +84,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 40,
     },
     albumItemsContainer: {
-        maxHeight: 300,
-        marginTop: 40,
+        maxHeight: 390,
+        marginTop: 10,
         overflow: 'scroll',
     },
     songItem: {
