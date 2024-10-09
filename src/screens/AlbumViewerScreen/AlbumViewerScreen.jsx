@@ -12,6 +12,7 @@ import ProgressBarContainer from "./components/ProgressBarContainer";
 import DurationText from "./components/DurationText";
 import TrackPlayer, { Event, useTrackPlayerEvents } from 'react-native-track-player'
 import UtilityButtons from "./components/UtilityButtons";
+import CustomStatusBar from "../PlayerScreen/components/CustomStatusBar";
 
 const AlbumViewerScreen = () => {
     const {
@@ -41,6 +42,7 @@ const AlbumViewerScreen = () => {
     
     return (
         trackList && queue && <View style={styles.container}>
+            <CustomStatusBar />
             {
                 albumMode
                 ? (

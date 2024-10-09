@@ -20,7 +20,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mujtest"
+      "package": "com.lissen-mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
