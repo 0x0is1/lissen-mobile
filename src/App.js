@@ -10,8 +10,10 @@ import TrackPlayer from 'react-native-track-player';
 import SearchScreen from './screens/SearchScreen/SearchScreen';
 import DashboardScreen from './screens/DashboardScreen/DashboardScreen';
 import AlbumViewerScreen from './screens/AlbumViewerScreen/AlbumViewerScreen';
+import Constants from './constants/constants';
 
 const Stack = createStackNavigator();
+const constants = new Constants();
 
 export default function App() {
   const [playerInitialized, setPlayerInitialized] = useState(false);
@@ -35,12 +37,12 @@ export default function App() {
     <PlayerProvider>
       <StatusBar backgroundColor={'transparent'} translucent />
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="DashboardScreen">
-          <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
-          <Stack.Screen name="AlbumsScreen" component={AlbumsScreen} />
-          <Stack.Screen name="SearchScreen" component={SearchScreen} />
-          <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
-          <Stack.Screen name="AlbumViewerScreen" component={AlbumViewerScreen} />
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={constants.screenRoutes.DASHBOARDSCREEN}>
+          <Stack.Screen name={constants.screenRoutes.PLAYERSCREEN} component={PlayerScreen} />
+          <Stack.Screen name={constants.screenRoutes.ALBUMSCREEN} component={AlbumsScreen} />
+          <Stack.Screen name={constants.screenRoutes.SEARCHSCREEN} component={SearchScreen} />
+          <Stack.Screen name={constants.screenRoutes.DASHBOARDSCREEN} component={DashboardScreen} />
+          <Stack.Screen name={constants.screenRoutes.ALBUMVIEWERSCREEN} component={AlbumViewerScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PlayerProvider>

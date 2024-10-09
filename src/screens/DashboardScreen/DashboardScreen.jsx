@@ -13,9 +13,10 @@ import Octicons from "react-native-vector-icons/Octicons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Footer from './components/Footer';
 import PlayerScreen from '../PlayerScreen/PlayerScreen';
+import Constants from '../../constants/constants';
 
 const Drawer = createDrawerNavigator();
-
+const constants = new Constants();
 
 const DashboardScreen = ({ navigation }) => {
   return (
@@ -32,71 +33,71 @@ const DashboardScreen = ({ navigation }) => {
         headerTitleAlign: 'left'
       }}
       drawerContent={(props) => <Footer {...props} />}
-      initialRouteName="AlbumsScreen"
+      initialRouteName={constants.drawerRoutes.ALBUMSCREEN}
     >
       <Drawer.Screen
-        name="AlbumsScreen"
+        name={constants.drawerRoutes.ALBUMSCREEN}
         component={AlbumsScreen}
         options={{
-          title: "Home",
+          title: constants.drawerTitles.ALBUM,
           drawerIcon: ({ color }) => <Ionicons name="home" size={25} color={color} />,
         }}
       />
       <Drawer.Screen
-        name="LibraryScreen"
+        name={constants.drawerRoutes.LIBRARYSCREEN}
         component={LibraryScreen}
         options={{
-          title: "Library",
+          title: constants.drawerTitles.LIBRARY,
           drawerIcon: ({ color }) => <Ionicons name="library" size={25} color={color} />,
         }}
       />
       <Drawer.Screen
-        name="DownloadsScreen"
+        name={constants.drawerRoutes.DOWNLOADSCREEN}
         component={DownloadsScreen}
         options={{
-          title: "Downloads",
+          title: constants.drawerTitles.DOWNLOADS,
           drawerIcon: ({ color }) => <Octicons name="download" size={25} color={color} />,
         }}
       />
       <Drawer.Screen
-        name="SettingsScreen"
+        name={constants.drawerRoutes.SETTINGSCREEN}
         component={SettingsScreen}
         options={{
-          title: "Settings",
+          title: constants.drawerTitles.SETTINGS,
           drawerIcon: ({ color }) => <Octicons name="gear" size={25} color={color} />,
         }}
       />
       <Drawer.Screen
-        name="SearchScreen"
+        name={constants.drawerRoutes.SEARCHSCREEN}
         component={SearchScreen}
         options={{
-          title: "Search",
+          title: constants.drawerTitles.SEARCH,
           drawerIcon: ({ color }) => <Ionicons name="search" size={25} color={color} />,
           headerShown: false,
         }}
       />
       <Drawer.Screen
-        name="AboutScreen"
+        name={constants.drawerRoutes.ABOUTSCREEN}
         component={AboutScreen}
         options={{
-          title: "About",
+          title: constants.drawerTitles.ABOUT,
           drawerIcon: ({ color }) => <Ionicons name="information-sharp" size={25} color={color} />,
         }}
       />
       <Drawer.Screen
-        name="VersionScreen"
+        name={constants.drawerRoutes.VERSIONSCREEN}
         component={VersionScreen}
         options={{
-          title: "Version",
+          title: constants.drawerTitles.VERSION,
           drawerIcon: ({ color }) => <Octicons name="versions" size={25} color={color} />,
           drawerItemStyle: { display: 'none' }
         }}
       />
       <Drawer.Screen
-        name="PlayerScreen"
+        name={constants.drawerRoutes.PLAYERSCREEN}
         component={PlayerScreen}
         options={{
-          title: "Player",
+          title: constants.drawerTitles.PLAYER,
           drawerIcon: ({ color }) => <Octicons name="play" size={25} color={color} />,
           headerShown: false
         }}
