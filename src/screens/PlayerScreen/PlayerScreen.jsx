@@ -3,7 +3,6 @@ import {
     View,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { PlayerContext } from '../../contexts/PlayerContext';
 import PlayerFooter from "./components/PlayerFooter";
 import PlayerBanner from "./components/PlayerBanner";
@@ -11,6 +10,7 @@ import AlbumItemsContainer from "./components/AlbumItemsContainer";
 import ProgressBarContainer from "./components/ProgressBarContainer";
 import DurationText from "./components/DurationText";
 import TrackPlayer, { Event, State, useTrackPlayerEvents } from 'react-native-track-player'
+import CustomStatusBar from "./components/CustomStatusBar";
 
 const PlayerScreen = () => {
     const {
@@ -42,6 +42,7 @@ const PlayerScreen = () => {
 
     return (
         isTrackAddingCompleted && <View style={styles.container}>
+            <CustomStatusBar />
             <PlayerBanner playingIndex={playingIndex} playList={queue} />
             {
                 albumMode
