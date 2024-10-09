@@ -20,21 +20,22 @@
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "package": "com.lissen-mobile"
+      "package": "com.lissenmobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "75473f8b-6c47-4311-8503-b220f3a0e7a9"
-      }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/75473f8b-6c47-4311-8503-b220f3a0e7a9"
+      "url": "https://u.expo.dev/edf2085f-2a08-4fbe-990f-e33ee757f0d6"
+    },
+    "owner": "0x0is1",
+    "extra": {
+      "eas": {
+        "projectId": "edf2085f-2a08-4fbe-990f-e33ee757f0d6"
+      }
     }
   }
 }
