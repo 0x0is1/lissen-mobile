@@ -64,7 +64,7 @@ const handleAlbum = async ({
                     albumCover: data.image.replace("150x150", "500x500"),
                     items: [
                         {
-                            id: item.id,
+                            id: itemId,
                             songName: data.song,
                             duration: data.duration,
                             songCover: data.image.replace("150x150", "500x500"),
