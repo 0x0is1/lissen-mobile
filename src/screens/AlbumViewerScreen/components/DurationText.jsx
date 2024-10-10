@@ -1,22 +1,20 @@
-import { StyleSheet, Text } from 'react-native'
-import React, { useContext } from 'react'
-import { PlayerContext } from '../../../contexts/PlayerContext';
+import { StyleSheet, Text } from "react-native";
+import React, { useContext } from "react";
+import { PlayerContext } from "../../../contexts/PlayerContext";
 
-const DurationText = ({currentDuration}) => {    
-    const { formatTime } = useContext(PlayerContext);
-    return (
-        <Text style={styles.durationText}>{formatTime(currentDuration)}</Text>
-    )
-}
+const DurationText = ({ currentDuration }) => {
+	const { formatTime } = useContext(PlayerContext);
+	return <Text style={styles.durationText}>{formatTime(currentDuration)}</Text>;
+};
 
-export default DurationText
+export default DurationText;
 
 const styles = StyleSheet.create({
-    durationText: {
-        position: "relative",
-        fontSize: 16,
-        color: "black",
-        marginTop: 70,
-        marginBottom: 100,
-    },
-})
+	durationText: {
+		position: "relative",
+		fontSize: 16,
+		color: "black",
+		marginTop: 70,
+		marginBottom: 100,
+	},
+});
