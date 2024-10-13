@@ -2,6 +2,7 @@ import { StyleSheet, ToastAndroid, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+
 const CustomStatusBar = () => {
 	const navigator = useNavigation();
 	return (
@@ -10,7 +11,7 @@ const CustomStatusBar = () => {
 				onPress={() => {
 					navigator.goBack();
 				}}
-				style={[styles.icons, { right: 140 }]}
+				style={styles.iconLeft}
 			>
 				<Ionicons name="chevron-back" size={25} color={"#000"} />
 			</TouchableOpacity>
@@ -18,7 +19,7 @@ const CustomStatusBar = () => {
 				onPress={() => {
 					ToastAndroid.show("Not implemented yet", ToastAndroid.SHORT);
 				}}
-				style={[styles.icons, { left: 140 }]}
+				style={styles.iconRight}
 			>
 				<Ionicons name="information" size={25} color={"#000"} />
 			</TouchableOpacity>
@@ -32,9 +33,17 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		position: "absolute",
 		flexDirection: "row",
+		justifyContent: "space-between",
 		top: 25,
+		width: "100%",
+		paddingHorizontal: 20,
 	},
-	icons: {
+	iconLeft: {
 		borderRadius: 40,
+		alignSelf: 'flex-start',
+	},
+	iconRight: {
+		borderRadius: 40,
+		alignSelf: 'flex-end',
 	},
 });

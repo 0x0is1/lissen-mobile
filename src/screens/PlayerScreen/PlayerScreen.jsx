@@ -44,11 +44,6 @@ const PlayerScreen = () => {
 		}
 	}, [isTrackAddingCompleted]);
 
-	useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async (event) => {
-		const queueres = await TrackPlayer.getQueue();
-		setQueue(queueres);
-	});
-
 	return (
 		isTrackAddingCompleted && (
 			<View style={styles.container}>
