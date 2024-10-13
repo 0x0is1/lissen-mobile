@@ -19,13 +19,17 @@ const SearchScreen = () => {
 				clearTimeout(timer);
 			}
 			const newTimer = setTimeout(async () => {
-				const response = await serviceProvider.getSearch(
-					encodeURIComponent(searchInput),
-					1,
-					searchType,
-				);
-				setResp(response?.results);
-			}, 1000);
+				try {
+					const response = await serviceProvider.getSearch(
+						encodeURIComponent(searchInput),
+						1,
+						searchType,
+					);
+					setResp(response?.results);
+				} catch (error) {
+					setResp(null);
+				}
+			}, 500);
 			setTimer(newTimer);
 		} else {
 			const fetchRecommendData = async () => {

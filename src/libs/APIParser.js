@@ -17,9 +17,11 @@ class ServiceProvider {
 						"B=ffe5a4383fa531151b96f993e2586d32; CT=MjgzNjUxNTc3; DL=english; L=hindi; geo=152.58.76.33%2CIN%2CPunjab%2CLudhiana%2C141007; mm_latlong=31.0048%2C75.9463; CH=G03%2CA07%2CO00%2CL03",
 				},
 			});
-
-			const data = await response.json();
-			return data;
+			if(response.status < 400){
+				const data = await response.json();
+				return data;
+			}
+			return null;
 		} catch (error) {
 			ToastAndroid.show(error, ToastAndroid.LONG);
 		}
