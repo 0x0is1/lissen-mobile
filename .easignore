@@ -16,3 +16,6 @@ npm-debug.*
 web-build/
 web-report/
 /android
+test-archive
+.easignore
+dist
