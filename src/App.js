@@ -11,6 +11,7 @@ import SearchScreen from "./screens/SearchScreen/SearchScreen";
 import DashboardScreen from "./screens/DashboardScreen/DashboardScreen";
 import AlbumViewerScreen from "./screens/AlbumViewerScreen/AlbumViewerScreen";
 import Constants from "./constants/constants";
+import FloatingPlayerScreen from "./screens/FloatingPlayerScreen/FloatingPlayerScreen";
 
 const Stack = createStackNavigator();
 const constants = new Constants();
@@ -62,6 +63,7 @@ export default function App() {
 						component={AlbumViewerScreen}
 					/>
 				</Stack.Navigator>
+				<FloatingPlayerScreen playerInitialized={playerInitialized} />
 			</NavigationContainer>
 		</PlayerProvider>
 	);
