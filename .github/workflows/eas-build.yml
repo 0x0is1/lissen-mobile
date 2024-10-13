@@ -9,7 +9,6 @@ on:
       - 'package.json'
       - 'package-lock.json'
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,3 +33,22 @@ jobs:
 
       - name: 🚀 Build app
         run: eas build --profile preview --platform android --non-interactive
+
+      - name: 🏗 Fetch latest build URL
+        run: |
+          BUILD_INFO=$(eas build:list --json --limit=1 --platform=android --non-interactive)
+          BUILD_URL=$(echo $BUILD_INFO | jq -r '.[0].artifacts.buildUrl')
+          echo "Build URL: $BUILD_URL"
+          echo "BUILD_URL=$BUILD_URL" >> $GITHUB_ENV
+
+      - name: 🏗 Update GitHub Repository Website Field
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_URL: ${{ env.BUILD_URL }}
+        run: |
+          curl \
+            -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_PAT }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/0x0is1/lissen-mobile \
+            -d '{"homepage": "'"$BUILD_URL"'"}'
