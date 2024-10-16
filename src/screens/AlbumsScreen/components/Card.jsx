@@ -14,17 +14,16 @@ import { fonts } from "../../../constants/fonts";
 
 const Card = ({ albumData, index }) => {
 	const navigation = useNavigation();
-	const { title, name, image } = albumData;
+	const { title, name, image, type } = albumData;
 
 	const albumTitle = title || name;
 	const displayTitle = decode(
-		albumTitle.length > 25 ? `${albumTitle.substring(0, 25)}...` : albumTitle
+		albumTitle.length > 30 ? `${albumTitle.substring(0, 30)}...` : albumTitle
 	);
 
 	const optimizedImageUri = image
 		.replace("150x150", "500x500")
 		.replace("50x50", "500x500");
-
 	const handlePress = () =>
 		handleAlbum({
 			albumData,
@@ -48,6 +47,7 @@ const Card = ({ albumData, index }) => {
 				imageStyle={styles.imageOverlay}
 			>
 				<View style={styles.overlay} />
+				<Text style={styles.albumType}>{type}</Text>
 				<Text style={styles.title}>{displayTitle}</Text>
 			</ImageBackground>
 		</TouchableOpacity>
@@ -59,7 +59,7 @@ export default Card;
 const styles = StyleSheet.create({
 	card: {
 		backgroundColor: colors.secondaryColor,
-		borderRadius: 10,
+		borderRadius: 8,
 		shadowColor: colors.primaryColor,
 		shadowOpacity: 0.15,
 		shadowRadius: 6,
@@ -84,10 +84,24 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		position: "absolute",
-		bottom: 8,
-		left: 8,
-		fontSize: 16,
+		textAlign: "center",
+		fontSize: 14,
 		color: colors.secondaryColor,
 		fontFamily: fonts.poppinsSecondary,
+		backgroundColor: colors.cardBgPrimary,
+		width: "100%"
 	},
+	albumType: {
+		position: "absolute",
+		top: 0,
+		right: 0,
+		margin: 5,
+		paddingHorizontal: 5,
+		borderRadius: 3,
+		backgroundColor: colors.cardBgPrimary,
+		textTransform: "capitalize",
+		color: colors.secondaryColor,
+		fontFamily: fonts.poppinsPrimary,
+		fontSize: 12
+	}
 });

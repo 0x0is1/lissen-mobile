@@ -23,4 +23,5 @@ export const colors = {
     floatingPlayerBgPrimary: "#000000",
     floatingPlayerColorSecomdary: "#B0B0B0",
     categoryColorPrimary: "#46494d",
+    cardBgPrimary: "rgba(20, 34, 51, 0.73)"
 }
