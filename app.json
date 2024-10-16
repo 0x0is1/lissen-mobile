@@ -5,8 +5,8 @@
 		"displayName": "Lissen",
 		"version": "0.1.5",
 		"orientation": "portrait",
-		"icon": "./assets/icon.png",
-		"displayLogo": "./assets/icon.png",
+		"icon": "./assets/icons8-musical-dotted/icons8-musical-100.png",
+		"displayLogo": "./assets/icons8-musical-dotted/icons8-musical-100.png",
 		"userInterfaceStyle": "light",
 		"splash": {
 			"image": "./assets/splash.png",
@@ -23,7 +23,7 @@
 			"package": "com.lissenmobile"
 		},
 		"web": {
-			"favicon": "./assets/favicon.png"
+			"favicon": "./assets/icons8-musical-dotted-favicons/web/icons8-musical-dotted-32.png"
 		},
 		"runtimeVersion": {
 			"policy": "appVersion"

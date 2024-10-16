@@ -8,7 +8,7 @@ const CenterHeader = () => {
 	return (
 		<View style={styles.title}>
 			<Image
-				source={require("../../../../assets/icon.png")}
+				source={require("../../../../assets/icons8-musical-dotted/icons8-musical-100.png")}
 				style={styles.icon}
 			/>
 			<Text style={[styles.text]}>
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
 		minWidth: "100%",
 	},
 	icon: {
-		width: 30,
-		height: 30,
-		marginRight: 8,
+		width: 35,
+		height: 35,
+		marginHorizontal: 2,
 	},
 	text: {
-		fontSize: 22,
+		fontSize: 24,
 		fontFamily: fonts.poppinsSecondary,
-		color: colors.categoryColorPrimary
+		color: colors.categoryColorPrimary,
 	},
 });
