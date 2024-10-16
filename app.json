@@ -29,7 +29,10 @@
 			"policy": "appVersion"
 		},
 		"updates": {
-			"url": "https://u.expo.dev/edf2085f-2a08-4fbe-990f-e33ee757f0d6"
+			"url": "https://u.expo.dev/edf2085f-2a08-4fbe-990f-e33ee757f0d6",
+			"enabled": true,
+			"fallbackToCacheTimeout": 0,
+			"checkAutomatically": "ON_LOAD"
 		},
 		"owner": "0x0is1",
 		"extra": {
