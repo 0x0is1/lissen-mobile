@@ -12,12 +12,30 @@ import DashboardScreen from "./screens/DashboardScreen/DashboardScreen";
 import AlbumViewerScreen from "./screens/AlbumViewerScreen/AlbumViewerScreen";
 import Constants from "./constants/constants";
 import FloatingPlayerScreen from "./screens/FloatingPlayerScreen/FloatingPlayerScreen";
+import autoUpdateFetch from "./utils/autoUpdateFetch";
+import loadFonts from "./utils/fontLoader";
 
 const Stack = createStackNavigator();
 const constants = new Constants();
 
 export default function App() {
 	const [playerInitialized, setPlayerInitialized] = useState(false);
+	const [fontsLoaded, setFontsLoaded] = useState(false);
+
+	useEffect(() => {
+		const loadAppFonts = async () => {
+			await loadFonts();
+			setFontsLoaded(true);
+		};
+
+		loadAppFonts();
+	}, []);
+	
+	useEffect(() => {
+		if (!__DEV__) {
+			autoUpdateFetch();
+		}
+	}, []);
 
 	useEffect(() => {
 		const initializePlayer = async () => {
@@ -28,13 +46,14 @@ export default function App() {
 					return async () => await TrackPlayer.destroy();
 				}
 			} catch (error) {
+				// setPlayerInitialized(true);
 				console.error("Error setting up player", error);
 			}
 		};
 		initializePlayer();
 	}, [playerInitialized]);
 
-	return (
+	return fontsLoaded && (
 		<PlayerProvider>
 			<StatusBar backgroundColor={"transparent"} translucent />
 			<NavigationContainer>
