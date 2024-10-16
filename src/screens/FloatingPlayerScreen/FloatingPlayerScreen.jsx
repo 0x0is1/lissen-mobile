@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
 		bottom: 5,
 		width: "94%",
 		marginHorizontal: "3%",
-		borderRadius: 10,
+		borderRadius: 8,
 		backgroundColor: colors.floatingPlayerBgPrimary,
 		paddingHorizontal: 8,
 		paddingTop: 4,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
 	albumArt: {
 		width: 40,
 		height: 40,
-		borderRadius: 8,
+		borderRadius: 6,
 		marginRight: 12,
 	},
 	textWrapper: {
@@ -235,12 +235,12 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	songTitle: {
-		fontSize: 16,
+		fontSize: 14,
 		color: colors.secondaryColor,
 		fontFamily: fonts.poppinsSecondary
 	},
 	artistName: {
-		fontSize: 14,
+		fontSize: 12,
 		color: colors.floatingPlayerColorSecomdary,
 		fontFamily: fonts.poppinsPrimary
 	},

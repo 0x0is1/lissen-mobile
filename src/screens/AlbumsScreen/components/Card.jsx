@@ -14,41 +14,41 @@ import { fonts } from "../../../constants/fonts";
 
 const Card = ({ albumData, index }) => {
 	const navigation = useNavigation();
-	albumData.title = albumData.title ? albumData.title : albumData.name;
+	const { title, name, image } = albumData;
+
+	const albumTitle = title || name;
+	const displayTitle = decode(
+		albumTitle.length > 25 ? `${albumTitle.substring(0, 25)}...` : albumTitle
+	);
+
+	const optimizedImageUri = image
+		.replace("150x150", "500x500")
+		.replace("50x50", "500x500");
+
+	const handlePress = () =>
+		handleAlbum({
+			albumData,
+			image_: image,
+			title_: albumTitle,
+			navigation,
+		});
+
+	const cardHeight = index % 3 === 0 ? 240 : 200;
 
 	return (
-		<TouchableOpacity delayPressIn={100}
-			onPress={() =>
-				handleAlbum({
-					albumData: albumData,
-					image_: albumData.image,
-					title_: albumData.title,
-					navigation: navigation,
-				})
-			}
-			style={[
-				styles.card,
-				{ height: index % 3 === 0 ? 240 : 200 },
-			]}
+		<TouchableOpacity
+			delayPressIn={100}
+			onPress={handlePress}
+			style={[styles.card, { height: cardHeight }]}
 			activeOpacity={0.85}
 		>
 			<ImageBackground
-				source={{
-					uri: albumData.image
-						.replace("150x150", "500x500")
-						.replace("50x50", "500x500"),
-				}}
+				source={{ uri: optimizedImageUri }}
 				style={styles.image}
 				imageStyle={styles.imageOverlay}
 			>
 				<View style={styles.overlay} />
-				<Text style={styles.title}>
-					{decode(
-						albumData.title.length > 20
-							? `${albumData.title.substring(0, 20)}...`
-							: albumData.title
-					)}
-				</Text>
+				<Text style={styles.title}>{displayTitle}</Text>
 			</ImageBackground>
 		</TouchableOpacity>
 	);
@@ -58,8 +58,6 @@ export default Card;
 
 const styles = StyleSheet.create({
 	card: {
-		maxWidth: 190,
-		minWidth: 170,
 		backgroundColor: colors.secondaryColor,
 		borderRadius: 10,
 		shadowColor: colors.primaryColor,
@@ -68,15 +66,13 @@ const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 3 },
 		elevation: 6,
 		overflow: "hidden",
-		marginHorizontal: 10,
-		marginVertical: 12,
+		marginHorizontal: 6,
+		marginVertical: 6,
 	},
 	image: {
 		width: "100%",
 		height: "100%",
 		justifyContent: "flex-end",
-		position: "relative",
-		overflow: "hidden",
 	},
 	imageOverlay: {
 		borderRadius: 10,
@@ -88,11 +84,10 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		position: "absolute",
-		bottom: 12,
-		left: 12,
-		fontSize: 18,
+		bottom: 8,
+		left: 8,
+		fontSize: 16,
 		color: colors.secondaryColor,
-		letterSpacing: 0.5,
 		fontFamily: fonts.poppinsSecondary,
 	},
 });
