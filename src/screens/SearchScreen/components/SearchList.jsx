@@ -8,22 +8,19 @@ const SearchList = ({ searchData }) => {
 		<Card albumData={item} index={index} />
 	);
 
-	return (
-		(searchData.length > 0) ? (
-			<MasonryList
-				data={searchData}
-				keyExtractor={(item) => item.id}
-				numColumns={2}
-				showsVerticalScrollIndicator={false}
-				renderItem={renderCard}
-				onEndReachedThreshold={0.1}
-			/>
-		)
-			: (
-				<View style={styles.noResultsContainer}>
-					<Text style={styles.noResultsText}>No results found</Text>
-				</View>
-			)
+	return searchData.length > 0 ? (
+		<MasonryList
+			data={searchData}
+			keyExtractor={(item) => item.id}
+			numColumns={2}
+			showsVerticalScrollIndicator={false}
+			renderItem={renderCard}
+			onEndReachedThreshold={0.1}
+		/>
+	) : (
+		<View style={styles.noResultsContainer}>
+			<Text style={styles.noResultsText}>No results found</Text>
+		</View>
 	);
 };
 

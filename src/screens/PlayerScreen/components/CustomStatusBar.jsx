@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
 	},
 	iconLeft: {
 		borderRadius: 40,
-		alignSelf: 'flex-start',
+		alignSelf: "flex-start",
 	},
 	iconRight: {
 		borderRadius: 40,
-		alignSelf: 'flex-end',
+		alignSelf: "flex-end",
 	},
 });
