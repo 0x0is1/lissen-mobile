@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { expo } from "../../../../app.json";
+import { colors } from "../../../constants/colors";
+import { fonts } from "../../../constants/fonts";
 
 const CenterHeader = () => {
 	return (
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 22,
-		fontFamily: "Poppins-Bold",
-		color: "#46494d"
+		fontFamily: fonts.poppinsSecondary,
+		color: colors.categoryColorPrimary
 	},
 });

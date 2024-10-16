@@ -14,6 +14,7 @@ import Constants from "./constants/constants";
 import FloatingPlayerScreen from "./screens/FloatingPlayerScreen/FloatingPlayerScreen";
 import autoUpdateFetch from "./utils/autoUpdateFetch";
 import loadFonts from "./utils/fontLoader";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const Stack = createStackNavigator();
 const constants = new Constants();
@@ -54,36 +55,38 @@ export default function App() {
 	}, [playerInitialized]);
 
 	return fontsLoaded && (
-		<PlayerProvider>
-			<StatusBar backgroundColor={"transparent"} translucent />
-			<NavigationContainer>
-				<Stack.Navigator
-					screenOptions={{ headerShown: false }}
-					initialRouteName={constants.screenRoutes.DASHBOARDSCREEN}
-				>
-					<Stack.Screen
-						name={constants.screenRoutes.PLAYERSCREEN}
-						component={PlayerScreen}
-					/>
-					<Stack.Screen
-						name={constants.screenRoutes.ALBUMSCREEN}
-						component={AlbumsScreen}
-					/>
-					<Stack.Screen
-						name={constants.screenRoutes.SEARCHSCREEN}
-						component={SearchScreen}
-					/>
-					<Stack.Screen
-						name={constants.screenRoutes.DASHBOARDSCREEN}
-						component={DashboardScreen}
-					/>
-					<Stack.Screen
-						name={constants.screenRoutes.ALBUMVIEWERSCREEN}
-						component={AlbumViewerScreen}
-					/>
-				</Stack.Navigator>
-				<FloatingPlayerScreen playerInitialized={playerInitialized} />
-			</NavigationContainer>
-		</PlayerProvider>
+		<ThemeProvider>
+			<PlayerProvider>
+				<StatusBar backgroundColor={"transparent"} translucent />
+				<NavigationContainer>
+					<Stack.Navigator
+						screenOptions={{ headerShown: false }}
+						initialRouteName={constants.screenRoutes.DASHBOARDSCREEN}
+					>
+						<Stack.Screen
+							name={constants.screenRoutes.PLAYERSCREEN}
+							component={PlayerScreen}
+						/>
+						<Stack.Screen
+							name={constants.screenRoutes.ALBUMSCREEN}
+							component={AlbumsScreen}
+						/>
+						<Stack.Screen
+							name={constants.screenRoutes.SEARCHSCREEN}
+							component={SearchScreen}
+						/>
+						<Stack.Screen
+							name={constants.screenRoutes.DASHBOARDSCREEN}
+							component={DashboardScreen}
+						/>
+						<Stack.Screen
+							name={constants.screenRoutes.ALBUMVIEWERSCREEN}
+							component={AlbumViewerScreen}
+						/>
+					</Stack.Navigator>
+					<FloatingPlayerScreen playerInitialized={playerInitialized} />
+				</NavigationContainer>
+			</PlayerProvider>
+		</ThemeProvider>
 	);
 }

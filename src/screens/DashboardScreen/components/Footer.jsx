@@ -7,6 +7,7 @@ import {
 } from "@react-navigation/drawer";
 import { expo } from "../../../../app.json";
 import Ionicons from "react-native-vector-icons/MaterialIcons";
+import { colors } from "../../../constants/colors";
 
 const Footer = (props) => {
 	const [remoteVersion, setRemoteVersion] = useState(null);
@@ -49,7 +50,7 @@ const Footer = (props) => {
 					<Ionicons
 						name="security-update"
 						size={25}
-						color={!isUpdateAvailable ? "#ccc" : "#000"}
+						color={!isUpdateAvailable ? colors.borderPrimary : colors.primaryColor}
 					/>
 				</TouchableOpacity>
 			</View>
@@ -62,17 +63,17 @@ export default Footer;
 const styles = StyleSheet.create({
 	footerContainer: {
 		borderTopWidth: 1,
-		borderTopColor: "#e4e4e4",
+		borderTopColor: colors.borderSecondary,
 		paddingVertical: 10,
 		paddingHorizontal: 20,
-		backgroundColor: "#f5f5f5",
+		backgroundColor: colors.secondaryBackgroundColor,
 		flexDirection: "row",
 		justifyContent: "space-around",
 		alignItems: "center",
 	},
 	footerText: {
 		fontSize: 14,
-		color: "#666",
+		color: colors.tertiaryColor,
 		textAlign: "center",
 	},
 });

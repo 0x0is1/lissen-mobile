@@ -4,6 +4,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { PlayerContext } from "../../../contexts/PlayerContext";
 import { Easing } from "react-native-reanimated";
 import { decode } from "html-entities";
+import { fonts } from "../../../constants/fonts";
 
 const AlbumItemsContainer = ({ trackList, playurlOverrider, queue }) => {
 	const { formatTime, albumItemsOpacity, albumMode, playingIndex, addTracks } =
@@ -33,8 +34,8 @@ const AlbumItemsContainer = ({ trackList, playurlOverrider, queue }) => {
 					style={[
 						styles.songItem,
 						item.id === (queue[playingIndex]?.id || undefined)
-							? { fontFamily: "Poppins-Bold" }
-							: { fontFamily: "Poppins-Regular" },
+							? { fontFamily: fonts.poppinsSecondary }
+							: { fontFamily: fonts.poppinsPrimary },
 					]}
 				>
 					{decode(item.songName).length > 30
@@ -45,8 +46,8 @@ const AlbumItemsContainer = ({ trackList, playurlOverrider, queue }) => {
 					style={[
 						styles.songItem,
 						item.id === (queue[playingIndex]?.id || undefined)
-							? { fontFamily: "Poppins-Bold" }
-							: { fontFamily: "Poppins-Regular" },
+							? { fontFamily: fonts.poppinsSecondary }
+							: { fontFamily: fonts.poppinsPrimary },
 					]}
 				>
 					{formatTime(item.duration)}
@@ -86,6 +87,6 @@ const styles = StyleSheet.create({
 	},
 	songItem: {
 		fontSize: 15,
-		fontFamily: "Poppins-Regular"
+		fontFamily: fonts.poppinsPrimary
 	},
 });

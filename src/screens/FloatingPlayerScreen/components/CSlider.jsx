@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import TrackPlayer from "react-native-track-player";
 import Slider from "@react-native-community/slider";
+import { colors } from "../../../constants/colors";
 
 const CSlider = ({ totalDuration, currentDuration }) => {
 	const handleSliderValueChange = async (value) => {
@@ -14,9 +15,9 @@ const CSlider = ({ totalDuration, currentDuration }) => {
 			maximumValue={1}
 			value={totalDuration > 0 ? currentDuration / totalDuration : 0}
 			onSlidingComplete={handleSliderValueChange}
-			minimumTrackTintColor="#FFFFFF"
-			maximumTrackTintColor="#FFFFFF"
-			thumbTintColor="#FFFFFF"
+			minimumTrackTintColor={colors.secondaryColor}
+			maximumTrackTintColor={colors.secondaryColor}
+			thumbTintColor={colors.secondaryColor}
 			thumbImage={null}
 		/>
 	);

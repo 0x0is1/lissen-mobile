@@ -4,6 +4,7 @@ import { PlayerContext } from "../../../contexts/PlayerContext";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 import { Easing } from "react-native-reanimated";
+import { colors } from "../../../constants/colors";
 
 const ProgressBarContainer = ({ totalDuration, currentDuration }) => {
 	const { albumMode, progressBarOpacity } = useContext(PlayerContext);
@@ -25,8 +26,8 @@ const ProgressBarContainer = ({ totalDuration, currentDuration }) => {
 					size={340}
 					width={8}
 					fill={totalDuration ? (currentDuration / totalDuration) * 100 : 0}
-					tintColor="black"
-					backgroundColor="gray"
+					tintColor={colors.progressBgTint}
+					backgroundColor={colors.progressBgPrimary}
 					padding={20}
 					arcSweepAngle={180}
 					rotation={-90}
@@ -36,8 +37,8 @@ const ProgressBarContainer = ({ totalDuration, currentDuration }) => {
 							cx={center.x}
 							cy={center.y}
 							r="10"
-							fill="white"
-							stroke="black"
+							fill={colors.secondaryColor}
+							stroke={colors.primaryColor}
 							strokeWidth={5}
 						/>
 					)}

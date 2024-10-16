@@ -2,6 +2,8 @@ import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { colors } from "../../../constants/colors";
+import { fonts } from "../../../constants/fonts";
 
 const Navbar = ({ setSearchInput }) => {
 	const navigator = useNavigation();
@@ -11,12 +13,12 @@ const Navbar = ({ setSearchInput }) => {
 	return (
 		<View style={styles.searchContainer}>
 			<TouchableOpacity activeOpacity={1} onPress={handleBack}>
-				<Ionicons name="arrow-back" size={25} color="black" />
+				<Ionicons name="arrow-back" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
 			<TextInput
 				style={styles.searchInputBox}
 				placeholder="Type songs, albums, artists ..."
-				placeholderTextColor="#999"
+				placeholderTextColor={colors.placeholder}
 				onChangeText={(input) => setSearchInput(input)}
 			/>
 		</View>
@@ -30,21 +32,21 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		paddingHorizontal: 15,
-		backgroundColor: "#f0f0f0",
+		backgroundColor: colors.navbarBg,
 		margin: 10,
 		marginTop: 25,
 	},
 	searchInputBox: {
 		flex: 1,
 		marginLeft: 15,
-		backgroundColor: "#fff",
+		backgroundColor: colors.secondaryBackgroundColor,
 		borderRadius: 25,
 		paddingVertical: 10,
 		paddingHorizontal: 15,
 		fontSize: 16,
-		color: "#333",
+		color: colors.drawerItemInactiveBg,
 		borderWidth: 1,
-		borderColor: "#ddd",
-		fontFamily: "Poppins-Regular"
+		borderColor: colors.shadowSecondary,
+		fontFamily: fonts.poppinsPrimary
 	},
 });

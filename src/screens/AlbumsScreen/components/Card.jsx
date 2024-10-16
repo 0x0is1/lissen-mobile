@@ -9,6 +9,8 @@ import React from "react";
 import { decode } from "html-entities";
 import handleAlbum from "../../../utils/albumParser";
 import { useNavigation } from "@react-navigation/native";
+import { colors } from "../../../constants/colors";
+import { fonts } from "../../../constants/fonts";
 
 const Card = ({ albumData, index }) => {
 	const navigation = useNavigation();
@@ -58,9 +60,9 @@ const styles = StyleSheet.create({
 	card: {
 		maxWidth: 190,
 		minWidth: 170,
-		backgroundColor: "#fff",
+		backgroundColor: colors.secondaryColor,
 		borderRadius: 10,
-		shadowColor: "#000",
+		shadowColor: colors.primaryColor,
 		shadowOpacity: 0.15,
 		shadowRadius: 6,
 		shadowOffset: { width: 0, height: 3 },
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
 	},
 	overlay: {
 		...StyleSheet.absoluteFillObject,
-		backgroundColor: "rgba(0, 0, 0, 0.4)",
+		backgroundColor: colors.overlayBgPrimary,
 		borderRadius: 10,
 	},
 	title: {
@@ -89,8 +91,8 @@ const styles = StyleSheet.create({
 		bottom: 12,
 		left: 12,
 		fontSize: 18,
-		color: "#fff",
+		color: colors.secondaryColor,
 		letterSpacing: 0.5,
-		fontFamily: 'Poppins-Bold',
+		fontFamily: fonts.poppinsSecondary,
 	},
 });

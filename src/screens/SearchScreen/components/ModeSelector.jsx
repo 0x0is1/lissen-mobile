@@ -1,6 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import SwitchSelector from "react-native-switch-selector";
+import { colors } from "../../../constants/colors";
+import { fonts } from "../../../constants/fonts";
 
 const ModeSelector = ({ setSearchType, searchType }) => {
 	const options = [
@@ -17,11 +19,13 @@ const ModeSelector = ({ setSearchType, searchType }) => {
 				initial={searchType}
 				onPress={(value) => setSearchType(value)}
 				hasPadding
-				buttonColor="#000"
-				textColor="#333"
+				buttonColor={colors.primaryColor}
+				textColor={colors.quartiaryColor}
 				height={48}
 				fontSize={14}
 				borderRadius={25}
+				textStyle={{ "fontFamily": fonts.poppinsPrimary }}
+				selectedTextStyle={{ "fontFamily": fonts.poppinsPrimary }}
 			/>
 		</View>
 	);

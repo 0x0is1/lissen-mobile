@@ -2,6 +2,7 @@ import { StyleSheet, ToastAndroid, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { colors } from "../../../constants/colors";
 
 const CustomStatusBar = () => {
 	const navigator = useNavigation();
@@ -13,7 +14,7 @@ const CustomStatusBar = () => {
 				}}
 				style={styles.iconLeft}
 			>
-				<Ionicons name="chevron-back" size={25} color={"#000"} />
+				<Ionicons name="chevron-back" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
 			<TouchableOpacity activeOpacity={1}
 				onPress={() => {
@@ -21,7 +22,7 @@ const CustomStatusBar = () => {
 				}}
 				style={styles.iconRight}
 			>
-				<Ionicons name="information" size={25} color={"#000"} />
+				<Ionicons name="information" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
 		</View>
 	);

@@ -9,6 +9,8 @@ import React, { useEffect, useContext, useState } from "react";
 import { PlayerContext } from "../../../contexts/PlayerContext";
 import { Easing } from "react-native-reanimated";
 import { decode } from "html-entities";
+import { colors } from "../../../constants/colors";
+import { fonts } from "../../../constants/fonts";
 
 const getDecodedText = (text, maxLength) => {
 	const decodedText = decode(text || "None");
@@ -88,7 +90,7 @@ export default PlayerBanner;
 const styles = StyleSheet.create({
 	overlay: {
 		...StyleSheet.absoluteFillObject,
-		backgroundColor: "rgba(0, 0, 0, 0.35)",
+		backgroundColor: colors.overlayBgSecondary,
 	},
 	imgContainer: {
 		width: 250,
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		borderBottomLeftRadius: 150,
 		borderBottomRightRadius: 150,
-		shadowColor: "#010101",
+		shadowColor: colors.shadowPrimary,
 		shadowOffset: {
 			width: 0,
 			height: 12,
@@ -114,13 +116,13 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		fontSize: 18,
 		bottom: 80,
-		color: "#fff",
-		fontFamily: "Poppins-Bold"
+		color: colors.secondaryColor,
+		fontFamily: fonts.poppinsSecondary
 	},
 	subtext: {
 		bottom: 50,
 		fontSize: 12,
 		textTransform: "uppercase",
-		fontFamily: "Poppins-Regular"
+		fontFamily: fonts.poppinsPrimary
 	},
 });

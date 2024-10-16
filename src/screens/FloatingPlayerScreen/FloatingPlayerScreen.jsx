@@ -10,6 +10,8 @@ import { PlayerContext } from "../../contexts/PlayerContext";
 import { decode } from "html-entities";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import CSlider from "./components/CSlider";
+import { colors } from "../../constants/colors";
+import { fonts } from "../../constants/fonts";
 
 const FloatingPlayerScreen = ({ playerInitialized }) => {
 	if (!playerInitialized) return; 
@@ -153,7 +155,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 											: "pause"
 								}
 								size={30}
-								color="white"
+								color={colors.secondaryColor}
 							/>
 						</TouchableOpacity>
 
@@ -161,7 +163,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 							style={[styles.nextButton]}
 							onPress={handleOnNext}
 						>
-							<Ionicons name="play-forward" size={30} color="#fff" />
+							<Ionicons name="play-forward" size={30} color={colors.secondaryColor} />
 						</TouchableOpacity>
 					</View>
 				</View>
@@ -185,11 +187,11 @@ const styles = StyleSheet.create({
 		width: "94%",
 		marginHorizontal: "3%",
 		borderRadius: 10,
-		backgroundColor: "#000",
+		backgroundColor: colors.floatingPlayerBgPrimary,
 		paddingHorizontal: 8,
 		paddingTop: 4,
 		elevation: 8,
-		shadowColor: "#000",
+		shadowColor: colors.shadowPrimary,
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.3,
 		shadowRadius: 4,
@@ -204,8 +206,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 8,
 	},
 	prevNextSongMode: {
-		backgroundColor: "#f5f5f4",
-		shadowColor: "#010101",
+		backgroundColor: colors.buttonsBg,
+		shadowColor: colors.shadowPrimary,
 		shadowOffset: {
 			width: 0,
 			height: 12,
@@ -234,13 +236,13 @@ const styles = StyleSheet.create({
 	},
 	songTitle: {
 		fontSize: 16,
-		color: "#FFFFFF",
-		fontFamily: "Poppins-Bold"
+		color: colors.secondaryColor,
+		fontFamily: fonts.poppinsSecondary
 	},
 	artistName: {
 		fontSize: 14,
-		color: "#B0B0B0",
-		fontFamily: "Poppins-Regular"
+		color: colors.floatingPlayerColorSecomdary,
+		fontFamily: fonts.poppinsPrimary
 	},
 	playPauseButtonContainer: {
 		justifyContent: "center",

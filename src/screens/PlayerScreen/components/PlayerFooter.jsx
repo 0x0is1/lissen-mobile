@@ -5,6 +5,7 @@ import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Easing } from "react-native-reanimated";
 import TrackPlayer, { RepeatMode, State } from "react-native-track-player";
+import { colors } from "../../../constants/colors";
 
 const PlayerFooter = ({
 	playState,
@@ -84,14 +85,14 @@ const PlayerFooter = ({
 						onRepeat && styles.prevNextSongMode,
 					]}
 				>
-					<Feather name="repeat" size={25} color="black" />
+					<Feather name="repeat" size={25} color={colors.primaryColor} />
 				</TouchableOpacity>
 				<View style={styles.playPauseControl}>
 					<TouchableOpacity activeOpacity={1}
 						style={[styles.prevButton, !albumMode && styles.prevNextSongMode]}
 						onPress={handleOnPrevious}
 					>
-						<Ionicons name="play-back" size={25} color="black" />
+						<Ionicons name="play-back" size={25} color={colors.primaryColor} />
 					</TouchableOpacity>
 					<TouchableOpacity activeOpacity={1}
 						style={styles.playPauseButtonContainer}
@@ -109,14 +110,14 @@ const PlayerFooter = ({
 										: "pause"
 							}
 							size={30}
-							color="white"
+							color={colors.secondaryColor}
 						/>
 					</TouchableOpacity>
 					<TouchableOpacity activeOpacity={1}
 						style={[styles.nextButton, !albumMode && styles.prevNextSongMode]}
 						onPress={handleOnNext}
 					>
-						<Ionicons name="play-forward" size={25} color="black" />
+						<Ionicons name="play-forward" size={25} color={colors.primaryColor} />
 					</TouchableOpacity>
 				</View>
 				<TouchableOpacity activeOpacity={1}
@@ -126,7 +127,7 @@ const PlayerFooter = ({
 						onShuffle && styles.prevNextSongMode,
 					]}
 				>
-					<Feather name="shuffle" size={25} color="black" />
+					<Feather name="shuffle" size={25} color={colors.primaryColor} />
 				</TouchableOpacity>
 			</View>
 		</Animated.View>
@@ -155,8 +156,8 @@ const styles = StyleSheet.create({
 	},
 
 	prevNextSongMode: {
-		backgroundColor: "#f5f5f4",
-		shadowColor: "#010101",
+		backgroundColor: colors.secondaryBackgroundColor,
+		shadowColor: colors.shadowPrimary,
 		shadowOffset: {
 			width: 0,
 			height: 12,
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
 		height: 70,
 		width: 70,
 		borderRadius: 35,
-		backgroundColor: "black",
+		backgroundColor: colors.floatingPlayerBgPrimary,
 		justifyContent: "center",
 		alignItems: "center",
 	},

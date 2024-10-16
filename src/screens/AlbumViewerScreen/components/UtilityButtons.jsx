@@ -7,6 +7,7 @@ import utilityButtonActions from "../../../utils/utilityButtonActions";
 import { useContext } from "react";
 import { PlayerContext } from "../../../contexts/PlayerContext";
 import { useNavigation } from "@react-navigation/native";
+import { colors } from "../../../constants/colors";
 
 const UtilityButtons = ({ trackList }) => {
 	const [addedToPlaylist, setAddedToPlaylist] = useState(false);
@@ -33,14 +34,14 @@ const UtilityButtons = ({ trackList }) => {
 						navigation,
 					})
 				}
-				style={[styles.button, { backgroundColor: "#38c999", borderWidth: 0 }]}
+				style={[styles.button, { backgroundColor: colors.albumPlayButtonBg, borderWidth: 0 }]}
 				accessibilityLabel="Play"
 			>
 				<Octicons
 					name={addedToPlaylist ? "playlist-add-check" : "playlist-add"}
 					size={25}
 					style={styles.icon}
-					color={"white"}
+					color={colors.secondaryColor}
 				/>
 			</TouchableOpacity>
 
@@ -89,9 +90,9 @@ const styles = StyleSheet.create({
 		marginHorizontal: 5,
 		padding: 10,
 		borderWidth: 1,
-		borderColor: "#ccc",
+		borderColor: colors.borderPrimary,
 		borderRadius: 50,
-		backgroundColor: "#f0f0f0",
+		backgroundColor: colors.navbarBg,
 	},
 	icon: {
 		textAlign: "center",

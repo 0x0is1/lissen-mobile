@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import MasonryList from "@react-native-seoul/masonry-list";
 import Card from "../../AlbumsScreen/components/Card";
+import { colors } from "../../../constants/colors";
+import { fonts } from "../../../constants/fonts";
 
 const SearchList = ({ searchData }) => {
 	const renderCard = ({ item, index }) => (
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
 	},
 	noResultsText: {
 		fontSize: 18,
-		color: "#555",
-		fontFamily: "Poppins-Bold"
+		color: colors.tertiaryColor,
+		fontFamily: fonts.poppinsSecondary
 	},
 });

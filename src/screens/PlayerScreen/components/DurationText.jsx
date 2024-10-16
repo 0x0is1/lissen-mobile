@@ -1,6 +1,8 @@
 import { StyleSheet, Text } from "react-native";
 import React, { useContext } from "react";
 import { PlayerContext } from "../../../contexts/PlayerContext";
+import { fonts } from "../../../constants/fonts";
+import { colors } from "../../../constants/colors";
 
 const DurationText = ({ currentDuration }) => {
 	const { formatTime } = useContext(PlayerContext);
@@ -13,9 +15,9 @@ const styles = StyleSheet.create({
 	durationText: {
 		position: "relative",
 		fontSize: 16,
-		color: "black",
+		color: colors.primaryColor,
 		marginTop: 70,
 		marginBottom: 100,
-		fontFamily: "Poppins-Regular"
+		fontFamily: fonts.poppinsPrimary
 	},
 });

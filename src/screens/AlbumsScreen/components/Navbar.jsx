@@ -2,6 +2,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Feather from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
+import { colors } from "../../../constants/colors";
 
 const Navbar = () => {
 	const navigator = useNavigation();
@@ -14,10 +15,10 @@ const Navbar = () => {
 	return (
 		<View style={styles.searchInput}>
 			<TouchableOpacity activeOpacity={1} onPress={handleDashboard}>
-				<Feather name="menu" size={25} color="black" />
+				<Feather name="menu" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
 			<TouchableOpacity activeOpacity={1} onPress={handleSearch}>
-				<Feather name="search" size={25} color="black" />
+				<Feather name="search" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
 		</View>
 	);

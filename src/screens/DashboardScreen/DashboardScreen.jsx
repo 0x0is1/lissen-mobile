@@ -14,6 +14,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Footer from "./components/Footer";
 import PlayerScreen from "../PlayerScreen/PlayerScreen";
 import Constants from "../../constants/constants";
+import { colors } from "../../constants/colors";
+import { fonts } from "../../constants/fonts";
 
 const Drawer = createDrawerNavigator();
 const constants = new Constants();
@@ -24,14 +26,14 @@ const DashboardScreen = ({ navigation }) => {
 			screenOptions={{
 				headerTitle: CenterHeader,
 				headerRight: ({color}) => RightHeaderButton({ navigation, color }),
-				drawerActiveTintColor: "#1f1e1e",
-				drawerInactiveTintColor: "#333131",
+				drawerActiveTintColor: colors.drawerItemActiveBg,
+				drawerInactiveTintColor: colors.drawerItemInactiveBg,
 				drawerStyle: {
-					backgroundColor: "#f5f5f5",
+					backgroundColor: colors.drawerBgPrimary,
 					width: 280,
 				},
 				drawerLabelStyle: {
-					fontFamily: "Poppins-Regular",
+					fontFamily: fonts.poppinsPrimary,
 					fontSize: 16,
 				},
 				drawerAllowFontScaling: true,

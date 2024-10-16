@@ -3,6 +3,8 @@ import React from "react";
 import MasonryList from "@react-native-seoul/masonry-list";
 import Card from "./Card";
 import generateEmoji from "../../../utils/emoticanGenerator";
+import { fonts } from "../../../constants/fonts";
+import { colors } from "../../../constants/colors";
 
 const Category = ({ categoryName, categoryData }) => {
 	categoryData = categoryData.map((item, index) => ({
@@ -39,9 +41,9 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 10,
 	},
 	categoryTitle: {
-		color: "#46494d",
+		color: colors.categoryColorPrimary,
 		fontSize: 26,
-		fontFamily: "Poppins-Regular",
+		fontFamily: fonts.poppinsSecondary,
 		textAlign: "left",
 		marginHorizontal: 10,
 		marginTop: 5,
