@@ -105,7 +105,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 		queue &&
 		queue[playingIndex] &&
 		shouldDisplay && (
-			<TouchableOpacity
+			<TouchableOpacity activeOpacity={1}
 				style={styles.container}
 				onPress={() => navigator.navigate("PlayerScreen")}
 			>
@@ -136,7 +136,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 					</View>
 
 					<View style={styles.controls}>
-						<TouchableOpacity
+						<TouchableOpacity activeOpacity={1}
 							style={styles.playPauseButtonContainer}
 							onPress={handlePlayPause}
 						>
@@ -157,7 +157,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 							/>
 						</TouchableOpacity>
 
-						<TouchableOpacity
+						<TouchableOpacity activeOpacity={1}
 							style={[styles.nextButton]}
 							onPress={handleOnNext}
 						>

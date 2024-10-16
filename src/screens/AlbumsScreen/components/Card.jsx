@@ -15,7 +15,7 @@ const Card = ({ albumData, index }) => {
 	albumData.title = albumData.title ? albumData.title : albumData.name;
 
 	return (
-		<TouchableOpacity
+		<TouchableOpacity delayPressIn={100}
 			onPress={() =>
 				handleAlbum({
 					albumData: albumData,

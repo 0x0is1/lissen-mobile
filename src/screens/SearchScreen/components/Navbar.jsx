@@ -10,7 +10,7 @@ const Navbar = ({ setSearchInput }) => {
 	};
 	return (
 		<View style={styles.searchContainer}>
-			<TouchableOpacity onPress={handleBack}>
+			<TouchableOpacity activeOpacity={1} onPress={handleBack}>
 				<Ionicons name="arrow-back" size={25} color="black" />
 			</TouchableOpacity>
 			<TextInput

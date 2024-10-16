@@ -77,7 +77,7 @@ const PlayerFooter = ({
 	return (
 		<Animated.View style={[styles.footer, { height: footerHeightAnim }]}>
 			<View style={styles.footercontainer}>
-				<TouchableOpacity
+				<TouchableOpacity activeOpacity={1}
 					onPress={handleOnRepeat}
 					style={[
 						styles.shuffleRepeatButtons,
@@ -87,13 +87,13 @@ const PlayerFooter = ({
 					<Feather name="repeat" size={25} color="black" />
 				</TouchableOpacity>
 				<View style={styles.playPauseControl}>
-					<TouchableOpacity
+					<TouchableOpacity activeOpacity={1}
 						style={[styles.prevButton, !albumMode && styles.prevNextSongMode]}
 						onPress={handleOnPrevious}
 					>
 						<Ionicons name="play-back" size={25} color="black" />
 					</TouchableOpacity>
-					<TouchableOpacity
+					<TouchableOpacity activeOpacity={1}
 						style={styles.playPauseButtonContainer}
 						onPress={handlePlayPause}
 					>
@@ -112,14 +112,14 @@ const PlayerFooter = ({
 							color="white"
 						/>
 					</TouchableOpacity>
-					<TouchableOpacity
+					<TouchableOpacity activeOpacity={1}
 						style={[styles.nextButton, !albumMode && styles.prevNextSongMode]}
 						onPress={handleOnNext}
 					>
 						<Ionicons name="play-forward" size={25} color="black" />
 					</TouchableOpacity>
 				</View>
-				<TouchableOpacity
+				<TouchableOpacity activeOpacity={1}
 					onPress={handleOnShuffle}
 					style={[
 						styles.shuffleRepeatButtons,

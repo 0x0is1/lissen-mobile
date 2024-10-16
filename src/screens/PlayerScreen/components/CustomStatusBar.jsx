@@ -7,7 +7,7 @@ const CustomStatusBar = () => {
 	const navigator = useNavigation();
 	return (
 		<View style={styles.buttonContainer}>
-			<TouchableOpacity
+			<TouchableOpacity activeOpacity={1}
 				onPress={() => {
 					navigator.goBack();
 				}}
@@ -15,7 +15,7 @@ const CustomStatusBar = () => {
 			>
 				<Ionicons name="chevron-back" size={25} color={"#000"} />
 			</TouchableOpacity>
-			<TouchableOpacity
+			<TouchableOpacity activeOpacity={1}
 				onPress={() => {
 					ToastAndroid.show("Not implemented yet", ToastAndroid.SHORT);
 				}}
