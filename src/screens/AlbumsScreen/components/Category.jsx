@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import MasonryList from "@react-native-seoul/masonry-list";
 import Card from "./Card";
+import generateEmoji from "../../../utils/emoticanGenerator";
 
 const Category = ({ categoryName, categoryData }) => {
 	categoryData = categoryData.map((item, index) => ({
@@ -12,7 +13,7 @@ const Category = ({ categoryName, categoryData }) => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.categoryTitle}>{categoryName}</Text>
+			<Text style={styles.categoryTitle}>{categoryName} {generateEmoji()}</Text>
 			<MasonryList
 				data={categoryData}
 				keyExtractor={(item) => item.id}
@@ -30,12 +31,19 @@ export default Category;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 5,
+		paddingHorizontal: 5,
+		overflow: 'hidden',
+		borderBottomWidth: 6,
+		borderBottomColor: 'gray',
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
 	},
 	categoryTitle: {
-		fontSize: 30,
-		fontWeight: "bold",
-		marginBottom: 5,
-		textAlign: "center",
+		color: "#46494d",
+		fontSize: 26,
+		fontFamily: "Poppins-Regular",
+		textAlign: "left",
+		marginHorizontal: 10,
+		marginTop: 5,
 	},
 });

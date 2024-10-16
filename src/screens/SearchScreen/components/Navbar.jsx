@@ -15,7 +15,7 @@ const Navbar = ({ setSearchInput }) => {
 			</TouchableOpacity>
 			<TextInput
 				style={styles.searchInputBox}
-				placeholder="Type song, album, artist ..."
+				placeholder="Type songs, albums, artists ..."
 				placeholderTextColor="#999"
 				onChangeText={(input) => setSearchInput(input)}
 			/>
@@ -45,5 +45,6 @@ const styles = StyleSheet.create({
 		color: "#333",
 		borderWidth: 1,
 		borderColor: "#ddd",
+		fontFamily: "Poppins-Regular"
 	},
 });

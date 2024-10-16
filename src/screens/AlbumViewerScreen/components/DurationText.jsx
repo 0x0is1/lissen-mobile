@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 	durationText: {
 		position: "relative",
 		fontSize: 16,
+		fontFamily: "Poppins-Regular",
 		color: "black",
 		marginTop: 70,
 		marginBottom: 100,

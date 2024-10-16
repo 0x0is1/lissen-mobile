@@ -113,12 +113,12 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		bottom: 80,
 		color: "#fff",
-		fontWeight: "500",
+		fontFamily: "Poppins-Bold"
 	},
 	subtext: {
 		bottom: 50,
 		fontSize: 12,
-		fontWeight: "300",
 		textTransform: "uppercase",
+		fontFamily: "Poppins-Regular"
 	},
 });

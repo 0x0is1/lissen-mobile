@@ -1,36 +1,15 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { expo } from "../../../../app.json";
-import * as Font from "expo-font";
-
-const loadFonts = async () => {
-	try {
-		await Font.loadAsync({
-			MonkeyBold: require("../../../../assets/fonts/MonkyBold.otf"),
-		});
-	} catch (error) {
-		console.error("Error loading font:", error);
-	}
-};
 
 const CenterHeader = () => {
-	const [fontsLoaded, setFontsLoaded] = useState(false);
-
-	useEffect(() => {
-		loadFonts().then(() => setFontsLoaded(true));
-	}, []);
-
-	if (!fontsLoaded) {
-		return null;
-	}
-
 	return (
 		<View style={styles.title}>
 			<Image
 				source={require("../../../../assets/icon.png")}
 				style={styles.icon}
 			/>
-			<Text style={[styles.text, { fontFamily: "MonkeyBold" }]}>
+			<Text style={[styles.text]}>
 				{expo.displayName}
 			</Text>
 		</View>
@@ -53,8 +32,8 @@ const styles = StyleSheet.create({
 		marginRight: 8,
 	},
 	text: {
-		fontWeight: "800",
-		fontSize: 18,
-		textTransform: "capitalize",
+		fontSize: 22,
+		fontFamily: "Poppins-Bold",
+		color: "#46494d"
 	},
 });

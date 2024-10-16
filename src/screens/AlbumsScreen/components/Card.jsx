@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const Card = ({ albumData, index }) => {
 	const navigation = useNavigation();
 	albumData.title = albumData.title ? albumData.title : albumData.name;
+
 	return (
 		<TouchableOpacity
 			onPress={() =>
@@ -23,7 +24,11 @@ const Card = ({ albumData, index }) => {
 					navigation: navigation,
 				})
 			}
-			style={[styles.card, { height: index % 3 === 0 ? 250 : 180 }]}
+			style={[
+				styles.card,
+				{ height: index % 3 === 0 ? 240 : 200 },
+			]}
+			activeOpacity={0.85}
 		>
 			<ImageBackground
 				source={{
@@ -37,9 +42,9 @@ const Card = ({ albumData, index }) => {
 				<View style={styles.overlay} />
 				<Text style={styles.title}>
 					{decode(
-						albumData.title.length > 15
-							? `${albumData.title.substring(0, 15)}...`
-							: albumData.title,
+						albumData.title.length > 20
+							? `${albumData.title.substring(0, 20)}...`
+							: albumData.title
 					)}
 				</Text>
 			</ImageBackground>
@@ -51,18 +56,18 @@ export default Card;
 
 const styles = StyleSheet.create({
 	card: {
-		maxWidth: 180,
-		minWidth: 165,
+		maxWidth: 190,
+		minWidth: 170,
 		backgroundColor: "#fff",
-		borderRadius: 8,
+		borderRadius: 10,
 		shadowColor: "#000",
-		shadowOpacity: 0.2,
-		shadowRadius: 4,
-		shadowOffset: { width: 0, height: 2 },
-		elevation: 5,
+		shadowOpacity: 0.15,
+		shadowRadius: 6,
+		shadowOffset: { width: 0, height: 3 },
+		elevation: 6,
 		overflow: "hidden",
-		marginHorizontal: 8,
-		marginVertical: 10,
+		marginHorizontal: 10,
+		marginVertical: 12,
 	},
 	image: {
 		width: "100%",
@@ -72,19 +77,20 @@ const styles = StyleSheet.create({
 		overflow: "hidden",
 	},
 	imageOverlay: {
-		borderRadius: 8,
+		borderRadius: 10,
 	},
 	overlay: {
 		...StyleSheet.absoluteFillObject,
-		backgroundColor: "rgba(0, 0, 0, 0.35)",
-		borderRadius: 8,
+		backgroundColor: "rgba(0, 0, 0, 0.4)",
+		borderRadius: 10,
 	},
 	title: {
 		position: "absolute",
-		bottom: 10,
-		left: 10,
-		fontSize: 20,
-		fontWeight: "800",
+		bottom: 12,
+		left: 12,
+		fontSize: 18,
 		color: "#fff",
+		letterSpacing: 0.5,
+		fontFamily: 'Poppins-Bold',
 	},
 });

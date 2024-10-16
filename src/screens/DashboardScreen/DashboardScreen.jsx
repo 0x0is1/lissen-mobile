@@ -23,13 +23,18 @@ const DashboardScreen = ({ navigation }) => {
 		<Drawer.Navigator
 			screenOptions={{
 				headerTitle: CenterHeader,
-				headerRight: () => RightHeaderButton({ navigation }),
-				drawerActiveTintColor: "#6200ee",
-				drawerInactiveTintColor: "#000",
+				headerRight: ({color}) => RightHeaderButton({ navigation, color }),
+				drawerActiveTintColor: "#1f1e1e",
+				drawerInactiveTintColor: "#333131",
 				drawerStyle: {
 					backgroundColor: "#f5f5f5",
 					width: 280,
 				},
+				drawerLabelStyle: {
+					fontFamily: "Poppins-Regular",
+					fontSize: 16,
+				},
+				drawerAllowFontScaling: true,
 				headerTitleAlign: "left",
 			}}
 			drawerContent={(props) => <Footer {...props} />}

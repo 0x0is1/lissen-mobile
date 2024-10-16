@@ -29,8 +29,8 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
 					style={[
 						styles.songItem,
 						item.id === (playList[playingIndex]?.id || undefined)
-							? { fontWeight: "800" }
-							: { fontWeight: "500" },
+							? { fontFamily: "Poppins-Bold" }
+							: { fontFamily: "Poppins-Regular" },
 					]}
 				>
 					{decode(item.title).length > 30
@@ -41,8 +41,8 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
 					style={[
 						styles.songItem,
 						item.id === (playList[playingIndex]?.id || undefined)
-							? { fontWeight: "800" }
-							: { fontWeight: "500" },
+							? { fontFamily: "Poppins-Bold" }
+							: { fontFamily: "Poppins-Regular" },
 					]}
 				>
 					{formatTime(item.duration)}
@@ -75,6 +75,8 @@ export default AlbumItemsContainer;
 const styles = StyleSheet.create({
 	placeholder: {
 		height: 300,
+		fontFamily: "Poppins-Regular",
+		fontSize: 16
 	},
 
 	albumItems: {
@@ -92,6 +94,6 @@ const styles = StyleSheet.create({
 	},
 	songItem: {
 		fontSize: 15,
-		fontWeight: "500",
+		fontFamily: "Poppins-Regular"
 	},
 });

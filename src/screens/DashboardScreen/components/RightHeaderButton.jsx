@@ -2,13 +2,13 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import React from "react";
 
-const RightHeaderButton = ({ navigation }) => {
+const RightHeaderButton = ({ navigation, color }) => {
 	return (
 		<TouchableOpacity
 			style={{ marginRight: 15 }}
 			onPress={() => navigation.navigate("SearchScreen")}
 		>
-			<Feather name="search" size={25} color="black" />
+			<Feather name="search" size={25} color={color} />
 		</TouchableOpacity>
 	);
 };

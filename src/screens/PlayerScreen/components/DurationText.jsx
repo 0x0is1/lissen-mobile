@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
 		color: "black",
 		marginTop: 70,
 		marginBottom: 100,
+		fontFamily: "Poppins-Regular"
 	},
 });
