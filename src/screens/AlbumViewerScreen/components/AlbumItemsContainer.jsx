@@ -28,7 +28,7 @@ const AlbumItemsContainer = ({ trackList, playurlOverrider, queue }) => {
 	};
 
 	const renderAlbumItems = ({ item, index }) => (
-		<TouchableOpacity activeOpacity={1} onPress={() => onItemPlayPressed(index)}>
+		<TouchableOpacity onPress={() => onItemPlayPressed(index)}>
 			<View style={styles.albumItems}>
 				<Text
 					style={[

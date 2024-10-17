@@ -15,7 +15,7 @@ const UtilityButtons = ({ trackList }) => {
 	const navigation = useNavigation();
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity activeOpacity={1}
+			<TouchableOpacity
 				style={styles.button}
 				onPress={() => utilityButtonActions("like", { trackList, likedList })}
 				accessibilityLabel="Like"
@@ -23,7 +23,7 @@ const UtilityButtons = ({ trackList }) => {
 				<Ionicon name="heart" size={25} style={styles.icon} color={"red"} />
 			</TouchableOpacity>
 
-			<TouchableOpacity activeOpacity={1}
+			<TouchableOpacity
 				onPress={() =>
 					utilityButtonActions("play", {
 						trackList,
@@ -45,7 +45,7 @@ const UtilityButtons = ({ trackList }) => {
 				/>
 			</TouchableOpacity>
 
-			<TouchableOpacity activeOpacity={1}
+			<TouchableOpacity
 				style={styles.button}
 				accessibilityLabel="Download"
 				onPress={() =>
@@ -55,7 +55,7 @@ const UtilityButtons = ({ trackList }) => {
 				<Octicons name="download" size={25} style={styles.icon} />
 			</TouchableOpacity>
 
-			<TouchableOpacity activeOpacity={1}
+			<TouchableOpacity
 				style={styles.button}
 				accessibilityLabel="Listen with people"
 				onPress={() =>
@@ -65,7 +65,7 @@ const UtilityButtons = ({ trackList }) => {
 				<Ionicon name="people" size={25} style={styles.icon} />
 			</TouchableOpacity>
 
-			<TouchableOpacity activeOpacity={1}
+			<TouchableOpacity
 				style={styles.button}
 				accessibilityLabel="Share"
 				onPress={() => utilityButtonActions("share", { trackList: trackList })}

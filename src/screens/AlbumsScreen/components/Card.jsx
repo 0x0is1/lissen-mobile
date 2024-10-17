@@ -36,7 +36,7 @@ const Card = ({ albumData, index }) => {
 
 	return (
 		<TouchableOpacity
-			delayPressIn={100}
+			delayPressIn={50}
 			onPress={handlePress}
 			style={[styles.card, { height: cardHeight }]}
 			activeOpacity={0.85}

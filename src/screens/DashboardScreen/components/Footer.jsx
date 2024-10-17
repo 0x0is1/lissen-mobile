@@ -43,7 +43,7 @@ const Footer = (props) => {
 						Latest Version: {remoteVersion || "NaN"}
 					</Text>
 				</View>
-				<TouchableOpacity activeOpacity={1}
+				<TouchableOpacity
 					onPress={() => props.navigation.navigate("VersionScreen")}
 					disabled={!isUpdateAvailable}
 				>

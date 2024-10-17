@@ -16,7 +16,7 @@ const CustomStatusBar = () => {
 			>
 				<Ionicons name="chevron-back" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
-			<TouchableOpacity activeOpacity={1}
+			<TouchableOpacity
 				onPress={() => {
 					ToastAndroid.show("Not implemented yet", ToastAndroid.SHORT);
 				}}

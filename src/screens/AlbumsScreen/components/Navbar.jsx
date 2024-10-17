@@ -14,10 +14,10 @@ const Navbar = () => {
 	};
 	return (
 		<View style={styles.searchInput}>
-			<TouchableOpacity activeOpacity={1} onPress={handleDashboard}>
+			<TouchableOpacity onPress={handleDashboard}>
 				<Feather name="menu" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
-			<TouchableOpacity activeOpacity={1} onPress={handleSearch}>
+			<TouchableOpacity onPress={handleSearch}>
 				<Feather name="search" size={25} color={colors.primaryColor} />
 			</TouchableOpacity>
 		</View>

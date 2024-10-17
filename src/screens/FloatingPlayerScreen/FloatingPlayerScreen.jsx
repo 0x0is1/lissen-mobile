@@ -138,7 +138,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 					</View>
 
 					<View style={styles.controls}>
-						<TouchableOpacity activeOpacity={1}
+						<TouchableOpacity
 							style={styles.playPauseButtonContainer}
 							onPress={handlePlayPause}
 						>
@@ -159,7 +159,7 @@ const FloatingPlayerScreen = ({ playerInitialized }) => {
 							/>
 						</TouchableOpacity>
 
-						<TouchableOpacity activeOpacity={1}
+						<TouchableOpacity
 							style={[styles.nextButton]}
 							onPress={handleOnNext}
 						>

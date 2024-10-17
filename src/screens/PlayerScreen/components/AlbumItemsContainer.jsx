@@ -24,7 +24,7 @@ const AlbumItemsContainer = ({ playList, playurlOverrider }) => {
 	};
 
 	const renderAlbumItems = ({ item, index }) => (
-		<TouchableOpacity activeOpacity={1} onPress={() => onItemPlayPressed(index)}>
+		<TouchableOpacity onPress={() => onItemPlayPressed(index)}>
 			<View style={styles.albumItems}>
 				<Text
 					style={[
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 		overflow: "scroll",
 	},
 	songItem: {
-		fontSize: 15,
+		fontSize: 14,
 		fontFamily: fonts.poppinsPrimary
 	},
 });

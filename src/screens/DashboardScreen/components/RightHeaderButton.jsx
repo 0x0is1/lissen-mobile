@@ -4,7 +4,7 @@ import React from "react";
 
 const RightHeaderButton = ({ navigation, color }) => {
 	return (
-		<TouchableOpacity activeOpacity={1}
+		<TouchableOpacity
 			style={{ marginRight: 15 }}
 			onPress={() => navigation.navigate("SearchScreen")}
 		>
